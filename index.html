@@ -3,9 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>YASZNOG THE GAME</title>
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
-    hello
+    <div id="header">
+        <img id="logo" src="photos/logo.jpg" alt="logo">
+        <img id="napis" src="photos/napis.png" alt="yasznog">
+    </div>
+
+    <div id="main">
+        
+         <button id="loguj" onclick="showLoginForm()">Zaloguj się</button>
+
+        <div id="loginForm">
+            <h2>Logowanie</h2>
+            <form>
+            <label for="username">Login:</label>
+            <input type="text" id="username" name="username"><br><br>
+            <label for="password">Hasło:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <input type="submit" value="Zaloguj">
+            </form>
+        </div>
+    </div>
+
+
+
+    <script src="skrypt.js"></script>
 </body>
 </html>

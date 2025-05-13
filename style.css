@@ -1,0 +1,30 @@
+#header {
+    width: auto;
+    height: 20%;
+}
+
+#logo{
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    width: 150px;
+    height: 150px;
+}
+
+#napis{
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    width: auto;
+    height: 150px;
+}
+
+#main{
+    width: auto;
+    height:60%;
+}
+
+#loginForm {
+      display: none;
+      margin-top: 20px;
+    }
