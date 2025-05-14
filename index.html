@@ -16,15 +16,27 @@
     <div id="main">
         
          <button id="loguj" onclick="showLoginForm()">Zaloguj się</button>
+         <button id="rejestruj" onclick="showRegisterForm()">Zarejestruj się</button>
 
         <div id="loginForm">
             <h2>Logowanie</h2>
-            <form>
+            <form action="logowanie.php" method="POST">
             <label for="username">Login:</label>
-            <input type="text" id="username" name="username"><br><br>
+            <input type="text" id="lusername" name="lusername"><br><br>
             <label for="password">Hasło:</label>
-            <input type="password" id="password" name="password"><br><br>
+            <input type="password" id="lpassword" name="lpassword"><br><br>
             <input type="submit" value="Zaloguj">
+            </form>
+        </div>
+
+        <div id="registerForm">
+            <h2>Rejestracja</h2>
+            <form action="rejestracja.php" method="POST">
+            <label for="rusername">Login:</label>
+            <input type="text" id="rusername" name="rusername"><br><br>
+            <label for="rpassword">Hasło:</label>
+            <input type="password" id="rpassword" name="rpassword"><br><br>
+            <input type="submit" value="Zarejestruj">
             </form>
         </div>
     </div>

@@ -28,3 +28,8 @@
       display: none;
       margin-top: 20px;
     }
+
+#registerForm {
+    display: none;
+    margin-top: 20px;
+}
