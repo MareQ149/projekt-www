@@ -241,3 +241,37 @@ footer{
 #dropdownMenu li a:hover {
   background-color: #555;
 }*/
+
+#statystyki {
+    background-color: #222;          /* ciemne tło */
+    color: #eee;                    /* jasny tekst */
+    padding: 15px 20px;
+    border-radius: 10px;
+    width: 300px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.6); /* delikatny żółty cień */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#statystyki h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #ffd700; /* złoty kolor nagłówka */
+    text-shadow: 1px 1px 3px #444;
+}
+
+#statystyki ul {
+    list-style: none;
+    padding: 0;
+}
+
+#statystyki li {
+    padding: 6px 0;
+    border-bottom: 1px solid #444;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+#statystyki li:last-child {
+    border-bottom: none;
+}
