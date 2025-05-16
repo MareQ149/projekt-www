@@ -1,0 +1,15 @@
+#ekwipunek{
+    width: 80%;
+    height: 80%;
+    border: 5px;
+    border-color: black;
+}
+#lewy{
+    float: left;
+}
+#glowny{
+    float: left;
+}
+#prawy{
+    float: left;
+}
