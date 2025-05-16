@@ -7,6 +7,26 @@
     <title>Walka</title>
 </head>
 <body>
+    <nav class="menu-wrapper">
+    <button id="menuToggle">☰ Menu</button>
+    <div id="dropdownMenu" class="hidden">
+    <ul>
+        <li><a href="stronka.php">Profil</a></li>
+        <li><a href="zbrojmistrz.html">Zbrojmistrz</a></li>
+        <li><a href="kowal.html">Kowal</a></li>
+        <li><a href="walka.html">Walka</a></li>
+        <li><a href="index.html">Wyloguj</a></li>
+    </ul>
+    </div>
+</nav>
+<script>
+  const toggleButton = document.getElementById("menuToggle");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+
+    toggleButton.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("show");
+  });
+</script>
     <h1>WITAJ NA ARENIE</h1>
     <h3>Tutaj udowodnisz swoją wartość i pokażesz an co cię stać</h3>
     <section id="postac">
