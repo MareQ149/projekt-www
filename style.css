@@ -1,4 +1,4 @@
-header {
+#header {
     width: auto;
     height: 20%;
 }
@@ -19,7 +19,7 @@ header {
     height: 150px;
 }
 
-main{
+#main{
     width: auto;
     height:60%;
 }
@@ -32,7 +32,4 @@ main{
 #registerForm {
     display: none;
     margin-top: 20px;
-}
-footer{
-    text-align: center;
 }
