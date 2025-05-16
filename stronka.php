@@ -58,7 +58,7 @@ $conn->close();
         <li><a href="zbrojmistrz.html">Zbrojmistrz</a></li>
         <li><a href="kowal.html">Kowal</a></li>
         <li><a href="walka.html">Walka</a></li>
-        <li><a href="index.html">Wyloguj</a></li>
+        <li><a href="logout.php">Wyloguj</a></li>
     </ul>
     </div>
 </nav>
