@@ -32,19 +32,19 @@ if ($result->num_rows === 1) {
         
         echo "<script>
                 alert('Udało się zalogować');
-                window.location.href = 'index.html'; // Przekierowanie na stronę główną
+                window.location.href = 'stronka.html'; // Przekierowanie na stronę główną
               </script>";
     } else {
         
         echo "<script>
                 alert('Błędne hasło');
-                window.location.href = 'index.html'; // Przekierowanie na stronę główną
+                window.location.href = 'index.html'; 
               </script>";
     }
 } else {
     echo "<script>
             alert('Nie znaleziono użytkownika');
-            window.location.href = 'index.html'; // Przekierowanie na stronę główną
+            window.location.href = 'index.html'; 
           </script>";
 }
 
