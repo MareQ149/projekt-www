@@ -1,15 +1,42 @@
-#ekwipunek{
+#ekwipunek {
+    display: flex;
     width: 80%;
     height: 80%;
-    border: 5px;
-    border-color: black;
+    border: 5px solid black;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 10px;
 }
-#lewy{
-    float: left;
+#lewy, #glowny, #prawy {
+    flex: 1;
+    padding: 10px;
 }
-#glowny{
-    float: left;
+#helm, #napiersnik, #buty, #bron, #tarcza, #trinket {
+    width: 200px;
+    height: 150px;
 }
-#prawy{
-    float: left;
+#postac{
+    width: 200px;
+    height: 450x;
+}
+#helm {
+    background-color: aqua;
+}
+#napiersnik {
+    background-color: blue;
+}
+#buty {
+    background-color: green;
+}
+#bron {
+    background-color: red;
+}
+#tarcza {
+    background-color: gray;
+}
+#trinket {
+    background-color: gold;
+}
+#postac {
+    background-color: lightgray;
 }
