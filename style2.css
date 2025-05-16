@@ -1,0 +1,144 @@
+#ekwipunek {
+    display: flex;
+    width: 80%;
+    height: 80%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 10px;
+}
+#lewy, #glowny, #prawy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+#glowny {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+#helm, #napiersnik, #buty, #bron, #tarcza, #trinket{
+    width: 200px;
+    height: 150px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    background-color: lightgray;
+}
+#postac{
+    width: 400px;
+    height: 450px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: auto;
+}
+
+#awatar{
+    width: 400px;
+    height: 450px;
+}
+
+#helm {
+    background-color: aqua;
+}
+#napiersnik {
+    background-color: blue;
+}
+#buty {
+    background-color: green;
+}
+#bron {
+    background-color: red;
+}
+#tarcza {
+    background-color: gray;
+}
+#trinket {
+    background-color: gold;
+}
+#postac {
+    background-color: lightgray;
+}
+#inwentarz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: auto;
+    border: 5px solid black;
+    box-sizing: border-box;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #f4f4f4;
+}
+
+#inventory {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#slot1, #slot2, #slot3, #slot4, #slot5 {
+    width: 200px;
+    height: 150px;
+    border: 2px solid #000;
+}
+#slot1{
+    background-color: red;
+}
+#slot2{
+    background-color: blue;
+}
+#slot3{
+    background-color: green;
+}
+#slot4{
+    background-color: yellow;
+}
+#slot5{
+    background-color: purple;
+}
+header {
+    width: auto;
+    height: 20%;
+}
+
+#logo{
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    width: 150px;
+    height: 150px;
+}
+
+#napis{
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    width: auto;
+    height: 150px;
+}
+footer{
+    text-align: center;
+}
+
+.slot {
+    width: 200px;
+    height: 150px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slot img {
+    max-width: 100%;
+    max-height: 100%;
+    user-select: none;
+    pointer-events: auto;
+}
