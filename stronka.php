@@ -42,7 +42,7 @@ $conn->close();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gra - Ekwipunek</title>
-    <link rel="stylesheet" href="style2.css" />
+    <link rel="stylesheet" href="stronka.css" />
 </head>
 <body>
 <header>
