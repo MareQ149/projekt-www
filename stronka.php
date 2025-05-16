@@ -42,13 +42,34 @@ $conn->close();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gra - Ekwipunek</title>
-    <link rel="stylesheet" href="style2.css" />
+    <link rel="stylesheet" href="stronka.css" />
 </head>
 <body>
 <header>
     <img id="logo" src="photos/logo.jpg" alt="logo" />
     <img id="napis" src="photos/napis.png" alt="yasznog" />
 </header>
+
+<nav class="menu-wrapper">
+    <button id="menuToggle">☰ Menu</button>
+    <div id="dropdownMenu" class="hidden">
+    <ul>
+        <li><a href="stronka.php">Profil</a></li>
+        <li><a href="zbrojmistrz.html">Zbrojmistrz</a></li>
+        <li><a href="kowal.html">Kowal</a></li>
+        <li><a href="walka.html">Walka</a></li>
+        <li><a href="index.html">Wyloguj</a></li>
+    </ul>
+    </div>
+</nav>
+<script>
+  const toggleButton = document.getElementById("menuToggle");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+
+    toggleButton.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("show");
+  });
+</script>
 
 <div id="ekwipunek">
     <section id="lewy">
