@@ -93,7 +93,6 @@ $stats['block'] += $bonuses['block_bonus'];
 </head>
 <body>
 <header>
-    <img id="logo" src="photos/logo.jpg" alt="logo" />
     <img id="napis" src="photos/napis.png" alt="yasznog" />
 </header>
 
@@ -145,12 +144,8 @@ $stats['block'] += $bonuses['block_bonus'];
             <?php endif; ?>
         </div>
     </section>
-
-    <section id="glowny">
-        <div id="postac">
-            <img id="awatar" src="photos/logo.jpg" alt="awatar" />
-        </div>
-    </section>
+    
+    <img id="awatar" src="photos/logo.jpg" alt="awatar" />
 
     <section id="prawy">
         <div id="bron" class="slot">
@@ -179,37 +174,31 @@ $stats['block'] += $bonuses['block_bonus'];
         </div>
     </section>
 </div>
-
-<div id="statystyki">
-    <h2>Statystyki postaci</h2>
-    <ul>
-        <li>HP: <?php echo $stats['hp']; ?></li>
-        <li>Obrażenia: <?php echo $stats['damage']; ?></li>
-        <li>Obrona: <?php echo $stats['defense']; ?></li>
-        <li>Zręczność: <?php echo $stats['agility']; ?></li>
-        <li>Szczęście: <?php echo $stats['luck']; ?></li>
-        <li>Blok: <?php echo $stats['block']; ?></li>
-    </ul>
+<div id="staty">
+    <?php for ($i = 1; $i <= 10; $i++):
+        $key = 'slot' . $i;
+    ?>
+        <div id="<?php echo $key; ?>" class="slot">
+            <?php if (!empty($slots[$key])): ?>
+                <img src="items/<?php echo htmlspecialchars($slots[$key]['photo']); ?>"
+                    alt="<?php echo htmlspecialchars($slots[$key]['name']); ?>"
+                    draggable="true"
+                    data-itemid="<?php echo (int)$slots[$key]['item_id']; ?>" />
+            <?php endif; ?>
+        </div>
+    <?php endfor; ?>
+    <div id="statystyki">
+        <h2>Statystyki postaci</h2>
+        <ul>
+            <li>HP: <?php echo $stats['hp']; ?></li>
+            <li>Obrażenia: <?php echo $stats['damage']; ?></li>
+            <li>Obrona: <?php echo $stats['defense']; ?></li>
+            <li>Zręczność: <?php echo $stats['agility']; ?></li>
+            <li>Szczęście: <?php echo $stats['luck']; ?></li>
+            <li>Blok: <?php echo $stats['block']; ?></li>
+        </ul>
+    </div>
 </div>
-
-
-<div id="inwentarz">
-    <section id="inventory">
-        <?php for ($i = 1; $i <= 5; $i++):
-            $key = 'slot' . $i;
-        ?>
-            <div id="<?php echo $key; ?>" class="slot">
-                <?php if (!empty($slots[$key])): ?>
-                    <img src="items/<?php echo htmlspecialchars($slots[$key]['photo']); ?>"
-                         alt="<?php echo htmlspecialchars($slots[$key]['name']); ?>"
-                         draggable="true"
-                         data-itemid="<?php echo (int)$slots[$key]['item_id']; ?>" />
-                <?php endif; ?>
-            </div>
-        <?php endfor; ?>
-    </section>
-</div>
-
 <footer>
     <p>WSZELKIE PRAWA ZASTRZEŻONE&copy;</p>
 </footer>
