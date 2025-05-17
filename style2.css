@@ -275,3 +275,11 @@ footer{
 #statystyki li:last-child {
     border-bottom: none;
 }
+
+#tooltip {
+  font-size: 14px;
+  max-width: 200px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+

@@ -4,7 +4,6 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: index.html");
     exit();
 }
-
 $user_id = $_SESSION['user_id'];
 
 $conn = new mysqli("localhost", "root", "", "projekt_www");
@@ -12,7 +11,7 @@ if ($conn->connect_error) {
     die("Błąd połączenia: " . $conn->connect_error);
 }
 
-// Pobranie statystyk postaci, łącznie z credits
+// Pobierz statystyki
 $stmt = $conn->prepare("SELECT hp, damage, defense, agility, luck, block, credits FROM postacie WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -23,11 +22,13 @@ $stats = $result->fetch_assoc() ?: [
 ];
 $stmt->close();
 
-// Pobranie itemów użytkownika
+// Pobierz itemy i bonusy
 $sql = "
-SELECT inv.slot, i.photo, i.id as item_id, i.name
+SELECT inv.slot, i.photo, i.id as item_id, i.name,
+       b.hp_bonus, b.damage_bonus, b.defense_bonus, b.agility_bonus, b.luck_bonus, b.block_bonus
 FROM inventory inv
 JOIN items i ON inv.item_id = i.id
+LEFT JOIN item_bonuses b ON i.id = b.item_id
 WHERE inv.user_id = ?
 ";
 $stmt = $conn->prepare($sql);
@@ -36,43 +37,22 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 $slots = [];
-$item_ids = [];
-while ($row = $result->fetch_assoc()) {
-    $slots[$row['slot']] = [
-        'photo' => $row['photo'],
-        'item_id' => $row['item_id'],
-        'name' => $row['name']
-    ];
-    if ($row['item_id']) {
-        $item_ids[] = $row['item_id'];
-    }
-}
-$stmt->close();
-
-// Pobranie bonusów
 $bonuses = [
     'hp_bonus' => 0, 'damage_bonus' => 0, 'defense_bonus' => 0,
     'agility_bonus' => 0, 'luck_bonus' => 0, 'block_bonus' => 0
 ];
+while ($row = $result->fetch_assoc()) {
+    $slots[$row['slot']] = $row;
 
-if (!empty($item_ids)) {
-    $placeholders = implode(',', array_fill(0, count($item_ids), '?'));
-    $types = str_repeat('i', count($item_ids));
-    $stmt = $conn->prepare("SELECT hp_bonus, damage_bonus, defense_bonus, agility_bonus, luck_bonus, block_bonus FROM item_bonuses WHERE item_id IN ($placeholders)");
-    $stmt->bind_param($types, ...$item_ids);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    while ($row = $result->fetch_assoc()) {
-        foreach ($bonuses as $key => &$value) {
-            $value += (int)$row[$key];
-        }
+    // Sumuj bonusy
+    foreach ($bonuses as $key => &$val) {
+        $val += (int)$row[$key];
     }
-    $stmt->close();
 }
+$stmt->close();
 $conn->close();
 
-// Sumowanie
+// Dodaj bonusy do bazowych statów
 $stats['hp'] += $bonuses['hp_bonus'];
 $stats['damage'] += $bonuses['damage_bonus'];
 $stats['defense'] += $bonuses['defense_bonus'];
@@ -111,11 +91,18 @@ $stats['block'] += $bonuses['block_bonus'];
     <section id="lewy">
         <?php foreach (['helm', 'napiersnik', 'buty'] as $slot): ?>
             <div id="<?= $slot ?>" class="slot">
-                <?php if (!empty($slots[$slot])): ?>
-                    <img src="items/<?= htmlspecialchars($slots[$slot]['photo']) ?>"
-                         alt="<?= htmlspecialchars($slots[$slot]['name']) ?>"
+                <?php if (!empty($slots[$slot])): $item = $slots[$slot]; ?>
+                    <img src="items/<?= htmlspecialchars($item['photo']) ?>"
+                         alt="<?= htmlspecialchars($item['name']) ?>"
                          draggable="true"
-                         data-itemid="<?= (int)$slots[$slot]['item_id'] ?>" />
+                         data-itemid="<?= (int)$item['item_id'] ?>"
+                         data-hp-bonus="<?= $item['hp_bonus'] ?? 0 ?>"
+                         data-damage-bonus="<?= $item['damage_bonus'] ?? 0 ?>"
+                         data-defense-bonus="<?= $item['defense_bonus'] ?? 0 ?>"
+                         data-agility-bonus="<?= $item['agility_bonus'] ?? 0 ?>"
+                         data-luck-bonus="<?= $item['luck_bonus'] ?? 0 ?>"
+                         data-block-bonus="<?= $item['block_bonus'] ?? 0 ?>"
+                    />
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>
@@ -130,11 +117,18 @@ $stats['block'] += $bonuses['block_bonus'];
     <section id="prawy">
         <?php foreach (['bron', 'tarcza', 'trinket'] as $slot): ?>
             <div id="<?= $slot ?>" class="slot">
-                <?php if (!empty($slots[$slot])): ?>
-                    <img src="items/<?= htmlspecialchars($slots[$slot]['photo']) ?>"
-                         alt="<?= htmlspecialchars($slots[$slot]['name']) ?>"
+                <?php if (!empty($slots[$slot])): $item = $slots[$slot]; ?>
+                    <img src="items/<?= htmlspecialchars($item['photo']) ?>"
+                         alt="<?= htmlspecialchars($item['name']) ?>"
                          draggable="true"
-                         data-itemid="<?= (int)$slots[$slot]['item_id'] ?>" />
+                         data-itemid="<?= (int)$item['item_id'] ?>"
+                         data-hp-bonus="<?= $item['hp_bonus'] ?? 0 ?>"
+                         data-damage-bonus="<?= $item['damage_bonus'] ?? 0 ?>"
+                         data-defense-bonus="<?= $item['defense_bonus'] ?? 0 ?>"
+                         data-agility-bonus="<?= $item['agility_bonus'] ?? 0 ?>"
+                         data-luck-bonus="<?= $item['luck_bonus'] ?? 0 ?>"
+                         data-block-bonus="<?= $item['block_bonus'] ?? 0 ?>"
+                    />
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>
@@ -160,11 +154,18 @@ $stats['block'] += $bonuses['block_bonus'];
             $key = 'slot' . $i;
         ?>
             <div id="<?= $key ?>" class="slot">
-                <?php if (!empty($slots[$key])): ?>
-                    <img src="items/<?= htmlspecialchars($slots[$key]['photo']) ?>"
-                         alt="<?= htmlspecialchars($slots[$key]['name']) ?>"
+                <?php if (!empty($slots[$key])): $item = $slots[$key]; ?>
+                    <img src="items/<?= htmlspecialchars($item['photo']) ?>"
+                         alt="<?= htmlspecialchars($item['name']) ?>"
                          draggable="true"
-                         data-itemid="<?= (int)$slots[$key]['item_id'] ?>" />
+                         data-itemid="<?= (int)$item['item_id'] ?>"
+                         data-hp-bonus="<?= $item['hp_bonus'] ?? 0 ?>"
+                         data-damage-bonus="<?= $item['damage_bonus'] ?? 0 ?>"
+                         data-defense-bonus="<?= $item['defense_bonus'] ?? 0 ?>"
+                         data-agility-bonus="<?= $item['agility_bonus'] ?? 0 ?>"
+                         data-luck-bonus="<?= $item['luck_bonus'] ?? 0 ?>"
+                         data-block-bonus="<?= $item['block_bonus'] ?? 0 ?>"
+                    />
                 <?php endif; ?>
             </div>
         <?php endfor; ?>
@@ -174,7 +175,6 @@ $stats['block'] += $bonuses['block_bonus'];
 <footer>
     <p>WSZELKIE PRAWA ZASTRZEŻONE&copy;</p>
 </footer>
-
 
 <script src="skrypt.js"></script>
 </body>

@@ -1,39 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="walka.css">
-    <title>Walka</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Walka</title>
+  <link rel="stylesheet" href="walka.css" />
 </head>
 <body>
-    <nav class="menu-wrapper">
+  <nav class="menu-wrapper">
     <button id="menuToggle">☰ Menu</button>
     <div id="dropdownMenu" class="hidden">
-    <ul>
+      <ul>
         <li><a href="stronka.php">Profil</a></li>
         <li><a href="zbrojmistrz.html">Zbrojmistrz</a></li>
         <li><a href="kowal.html">Kowal</a></li>
         <li><a href="walka.html">Walka</a></li>
         <li><a href="logout.php">Wyloguj</a></li>
-    </ul>
+      </ul>
     </div>
-</nav>
-<script>
-  const toggleButton = document.getElementById("menuToggle");
-  const dropdownMenu = document.getElementById("dropdownMenu");
+  </nav>
 
-    toggleButton.addEventListener("click", () => {
-        dropdownMenu.classList.toggle("show");
-  });
-</script>
-    <h1>WITAJ NA ARENIE</h1>
-    <h3>Tutaj udowodnisz swoją wartość i pokażesz an co cię stać</h3>
+  <h1>WITAJ NA ARENIE</h1>
+  <h3>Tutaj udowodnisz swoją wartość i pokażesz, na co cię stać</h3>
+
+  <button id="findEnemyBtn">Szukaj przeciwnika</button>
+
+  <div id="arena">
     <section id="postac">
-
+      <!-- Statystyki postaci pojawią się tutaj -->
     </section>
     <section id="wrog">
-
+      <h2>Wróg</h2>
+      <p>Szukaj przeciwnika</p>
     </section>
+  </div>
+
+  <script src="walka.js"></script>
 </body>
 </html>
