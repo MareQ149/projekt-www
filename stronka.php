@@ -126,6 +126,9 @@ $stats['block'] += $bonuses['block_bonus'];
                      draggable="true"
                      data-itemid="<?php echo (int)$slots['helm']['item_id']; ?>" />
             <?php endif; ?>
+            <?php if (empty($slots['helm'])): ?>
+                <img src="items/helm_slot.png" draggable="false">
+            <?php endif; ?>
         </div>
         <div id="napiersnik" class="slot">
             <?php if (!empty($slots['napiersnik'])): ?>
@@ -134,6 +137,9 @@ $stats['block'] += $bonuses['block_bonus'];
                      draggable="true"
                      data-itemid="<?php echo (int)$slots['napiersnik']['item_id']; ?>" />
             <?php endif; ?>
+            <?php if (empty($slots['napiersnik'])): ?>
+                <img src="items/zbroja_slot.png" draggable="false">
+            <?php endif; ?>
         </div>
         <div id="buty" class="slot">
             <?php if (!empty($slots['buty'])): ?>
@@ -141,6 +147,9 @@ $stats['block'] += $bonuses['block_bonus'];
                      alt="<?php echo htmlspecialchars($slots['buty']['name']); ?>"
                      draggable="true"
                      data-itemid="<?php echo (int)$slots['buty']['item_id']; ?>" />
+            <?php endif; ?>
+            <?php if (empty($slots['buty'])): ?>
+                <img src="items/buty_slot.png" draggable="false">
             <?php endif; ?>
         </div>
     </section>
@@ -155,6 +164,9 @@ $stats['block'] += $bonuses['block_bonus'];
                      draggable="true"
                      data-itemid="<?php echo (int)$slots['bron']['item_id']; ?>" />
             <?php endif; ?>
+            <?php if (empty($slots['bron'])): ?>
+                <img src="items/miecz_slot.png" draggable="false">
+            <?php endif; ?>
         </div>
         <div id="tarcza" class="slot">
             <?php if (!empty($slots['tarcza'])): ?>
@@ -163,6 +175,9 @@ $stats['block'] += $bonuses['block_bonus'];
                      draggable="true"
                      data-itemid="<?php echo (int)$slots['tarcza']['item_id']; ?>" />
             <?php endif; ?>
+            <?php if (empty($slots['tarcza'])): ?>
+                <img src="items/tarcza_slot.png" draggable="false">
+            <?php endif; ?>
         </div>
         <div id="trinket" class="slot">
             <?php if (!empty($slots['trinket'])): ?>
@@ -170,6 +185,9 @@ $stats['block'] += $bonuses['block_bonus'];
                      alt="<?php echo htmlspecialchars($slots['trinket']['name']); ?>"
                      draggable="true"
                      data-itemid="<?php echo (int)$slots['trinket']['item_id']; ?>" />
+            <?php endif; ?>
+            <?php if (empty($slots['trinket'])): ?>
+                <img src="items/trinket_slot.png" draggable="false">
             <?php endif; ?>
         </div>
     </section>

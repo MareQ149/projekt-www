@@ -41,6 +41,14 @@ body {
   object-fit: contain;
 }
 
+#ekwipunek .slot {
+  border: 2px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1.5 / 1;
+}
+
 #helm, #napiersnik, #buty, #bron, #tarcza, #trinket {
     width: 100%;
     min-width: 21px;
