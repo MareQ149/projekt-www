@@ -49,7 +49,8 @@ if ($stmt->execute()) {
         $slots[] = 'slot' . $i;
     }
 
-    $stmt2 = $conn->prepare("INSERT INTO inventory (user_id, item_id, slot) VALUES (?, NULL, ?)");
+    // Poprawiony INSERT do inventory z kolejnością: user_id, slot, item_id
+    $stmt2 = $conn->prepare("INSERT INTO inventory (user_id, slot, item_id) VALUES (?, ?, NULL)");
     foreach ($slots as $slot) {
         $stmt2->bind_param("is", $user_id, $slot);
         $stmt2->execute();
