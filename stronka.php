@@ -197,7 +197,7 @@ foreach ($all_slots as $slot => $item) {
         <ul>
             <li><a href="stronka.php">Profil</a></li>
             <li><a href="zbrojmistrz.html">Zbrojmistrz</a></li>
-            <li><a href="kowal.html">Kowal</a></li>
+            <li><a href="kowal.php">Kowal</a></li>
             <li><a href="walka.html">Walka</a></li>
             <li><a href="logout.php">Wyloguj</a></li>
         </ul>
@@ -279,7 +279,7 @@ foreach ($all_slots as $slot => $item) {
                     data-luck="<?php echo $bonuses_for_tooltip['bron']['luck_bonus']; ?>"
                     data-block="<?php echo $bonuses_for_tooltip['bron']['block_bonus']; ?>" />
             <?php else: ?>
-                <img src="items/bron_slot.png" alt="Pusty slot broń" />
+                <img src="items/miecz_slot.png" alt="Pusty slot broń" />
             <?php endif; ?>
         </div>
 
