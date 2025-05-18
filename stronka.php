@@ -50,6 +50,41 @@ while ($row = $result_all->fetch_assoc()) {
 }
 $stmt_all->close();
 
+// --- NOWA CZĘŚĆ: pobranie danych do tooltipów (nazwa + bonusy) ---
+$sql_tooltip = "
+    SELECT i.id as item_id, i.name, 
+           COALESCE(b.hp_bonus, 0) as hp_bonus,
+           COALESCE(b.damage_bonus, 0) as damage_bonus,
+           COALESCE(b.defense_bonus, 0) as defense_bonus,
+           COALESCE(b.agility_bonus, 0) as agility_bonus,
+           COALESCE(b.luck_bonus, 0) as luck_bonus,
+           COALESCE(b.block_bonus, 0) as block_bonus
+    FROM inventory inv
+    LEFT JOIN items i ON inv.item_id = i.id
+    LEFT JOIN item_bonuses b ON i.id = b.item_id
+    WHERE inv.user_id = ?
+";
+$stmt_tooltip = $conn->prepare($sql_tooltip);
+$stmt_tooltip->bind_param("i", $user_id);
+$stmt_tooltip->execute();
+$result_tooltip = $stmt_tooltip->get_result();
+
+$tooltips_data = [];
+while ($row = $result_tooltip->fetch_assoc()) {
+    if ($row['item_id']) {
+        $tooltips_data[$row['item_id']] = [
+            'name' => $row['name'],
+            'hp_bonus' => (int)$row['hp_bonus'],
+            'damage_bonus' => (int)$row['damage_bonus'],
+            'defense_bonus' => (int)$row['defense_bonus'],
+            'agility_bonus' => (int)$row['agility_bonus'],
+            'luck_bonus' => (int)$row['luck_bonus'],
+            'block_bonus' => (int)$row['block_bonus'],
+        ];
+    }
+}
+$stmt_tooltip->close();
+
 // 2) Pobierz tylko itemy z wybranych slotów do liczenia statystyk
 $equipmentSlots = ['helm', 'napiersnik', 'buty', 'bron', 'tarcza', 'trinket'];
 
@@ -121,7 +156,27 @@ foreach ($bonuses as $key => $value) {
     $stat_key = str_replace('_bonus', '', $key);
     $stats[$stat_key] += $value;
 }
+// Mapowanie bonusów do slotów (do data- w HTML)
+$bonuses_for_tooltip = [];
+foreach ($all_slots as $slot => $item) {
+    if ($item && isset($tooltips_data[$item['item_id']])) {
+        $bonuses_for_tooltip[$slot] = $tooltips_data[$item['item_id']];
+    } else {
+        // Domyślne wartości gdy brak itemu w slocie
+        $bonuses_for_tooltip[$slot] = [
+            'hp_bonus' => 0,
+            'damage_bonus' => 0,
+            'defense_bonus' => 0,
+            'agility_bonus' => 0,
+            'luck_bonus' => 0,
+            'block_bonus' => 0,
+            'name' => ''
+        ];
+    }
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -156,7 +211,14 @@ foreach ($bonuses as $key => $value) {
                 <img src="items/<?php echo htmlspecialchars($all_slots['helm']['photo']); ?>"
                      alt="<?php echo htmlspecialchars($all_slots['helm']['name']); ?>"
                      draggable="true"
-                     data-itemid="<?php echo (int)$all_slots['helm']['item_id']; ?>" />
+                     data-itemid="<?php echo (int)$all_slots['helm']['item_id']; ?>" 
+                     data-name="<?php echo htmlspecialchars($all_slots['helm']['name']); ?>"
+                     data-hp="<?php echo $bonuses_for_tooltip['helm']['hp_bonus']; ?>"
+                     data-damage="<?php echo $bonuses_for_tooltip['helm']['damage_bonus']; ?>"
+                     data-defense="<?php echo $bonuses_for_tooltip['helm']['defense_bonus']; ?>"
+                     data-agility="<?php echo $bonuses_for_tooltip['helm']['agility_bonus']; ?>"
+                     data-luck="<?php echo $bonuses_for_tooltip['helm']['luck_bonus']; ?>"
+                     data-block="<?php echo $bonuses_for_tooltip['helm']['block_bonus']; ?>" />
             <?php else: ?>
                 <img src="items/helm_slot.png" alt="Pusty slot helm" />
             <?php endif; ?>
@@ -165,24 +227,39 @@ foreach ($bonuses as $key => $value) {
         <div id="napiersnik" class="slot">
             <?php if (!empty($all_slots['napiersnik'])): ?>
                 <img src="items/<?php echo htmlspecialchars($all_slots['napiersnik']['photo']); ?>"
-                     alt="<?php echo htmlspecialchars($all_slots['napiersnik']['name']); ?>"
-                     draggable="true"
-                     data-itemid="<?php echo (int)$all_slots['napiersnik']['item_id']; ?>" />
+                    alt="<?php echo htmlspecialchars($all_slots['napiersnik']['name']); ?>"
+                    draggable="true"
+                    data-itemid="<?php echo (int)$all_slots['napiersnik']['item_id']; ?>"
+                    data-name="<?php echo htmlspecialchars($all_slots['napiersnik']['name']); ?>"
+                    data-hp="<?php echo $bonuses_for_tooltip['napiersnik']['hp_bonus']; ?>"
+                    data-damage="<?php echo $bonuses_for_tooltip['napiersnik']['damage_bonus']; ?>"
+                    data-defense="<?php echo $bonuses_for_tooltip['napiersnik']['defense_bonus']; ?>"
+                    data-agility="<?php echo $bonuses_for_tooltip['napiersnik']['agility_bonus']; ?>"
+                    data-luck="<?php echo $bonuses_for_tooltip['napiersnik']['luck_bonus']; ?>"
+                    data-block="<?php echo $bonuses_for_tooltip['napiersnik']['block_bonus']; ?>" />
             <?php else: ?>
-                <img src="items/zbroja_slot.png" alt="Pusty slot napiersnik" />
+                <img src="items/zbroja_slot.png" alt="Pusty slot napierśnik" />
             <?php endif; ?>
         </div>
 
         <div id="buty" class="slot">
             <?php if (!empty($all_slots['buty'])): ?>
                 <img src="items/<?php echo htmlspecialchars($all_slots['buty']['photo']); ?>"
-                     alt="<?php echo htmlspecialchars($all_slots['buty']['name']); ?>"
-                     draggable="true"
-                     data-itemid="<?php echo (int)$all_slots['buty']['item_id']; ?>" />
+                    alt="<?php echo htmlspecialchars($all_slots['buty']['name']); ?>"
+                    draggable="true"
+                    data-itemid="<?php echo (int)$all_slots['buty']['item_id']; ?>"
+                    data-name="<?php echo htmlspecialchars($all_slots['buty']['name']); ?>"
+                    data-hp="<?php echo $bonuses_for_tooltip['buty']['hp_bonus']; ?>"
+                    data-damage="<?php echo $bonuses_for_tooltip['buty']['damage_bonus']; ?>"
+                    data-defense="<?php echo $bonuses_for_tooltip['buty']['defense_bonus']; ?>"
+                    data-agility="<?php echo $bonuses_for_tooltip['buty']['agility_bonus']; ?>"
+                    data-luck="<?php echo $bonuses_for_tooltip['buty']['luck_bonus']; ?>"
+                    data-block="<?php echo $bonuses_for_tooltip['buty']['block_bonus']; ?>" />
             <?php else: ?>
                 <img src="items/buty_slot.png" alt="Pusty slot buty" />
             <?php endif; ?>
         </div>
+
     </section>
 
     <img id="awatar" src="photos/logo.jpg" alt="awatar" />
@@ -191,35 +268,59 @@ foreach ($bonuses as $key => $value) {
         <div id="bron" class="slot">
             <?php if (!empty($all_slots['bron'])): ?>
                 <img src="items/<?php echo htmlspecialchars($all_slots['bron']['photo']); ?>"
-                     alt="<?php echo htmlspecialchars($all_slots['bron']['name']); ?>"
-                     draggable="true"
-                     data-itemid="<?php echo (int)$all_slots['bron']['item_id']; ?>" />
+                    alt="<?php echo htmlspecialchars($all_slots['bron']['name']); ?>"
+                    draggable="true"
+                    data-itemid="<?php echo (int)$all_slots['bron']['item_id']; ?>"
+                    data-name="<?php echo htmlspecialchars($all_slots['bron']['name']); ?>"
+                    data-hp="<?php echo $bonuses_for_tooltip['bron']['hp_bonus']; ?>"
+                    data-damage="<?php echo $bonuses_for_tooltip['bron']['damage_bonus']; ?>"
+                    data-defense="<?php echo $bonuses_for_tooltip['bron']['defense_bonus']; ?>"
+                    data-agility="<?php echo $bonuses_for_tooltip['bron']['agility_bonus']; ?>"
+                    data-luck="<?php echo $bonuses_for_tooltip['bron']['luck_bonus']; ?>"
+                    data-block="<?php echo $bonuses_for_tooltip['bron']['block_bonus']; ?>" />
             <?php else: ?>
-                <img src="items/miecz_slot.png" alt="Pusty slot miecz" />
+                <img src="items/bron_slot.png" alt="Pusty slot broń" />
             <?php endif; ?>
         </div>
+
 
         <div id="tarcza" class="slot">
             <?php if (!empty($all_slots['tarcza'])): ?>
                 <img src="items/<?php echo htmlspecialchars($all_slots['tarcza']['photo']); ?>"
-                     alt="<?php echo htmlspecialchars($all_slots['tarcza']['name']); ?>"
-                     draggable="true"
-                     data-itemid="<?php echo (int)$all_slots['tarcza']['item_id']; ?>" />
+                    alt="<?php echo htmlspecialchars($all_slots['tarcza']['name']); ?>"
+                    draggable="true"
+                    data-itemid="<?php echo (int)$all_slots['tarcza']['item_id']; ?>"
+                    data-name="<?php echo htmlspecialchars($all_slots['tarcza']['name']); ?>"
+                    data-hp="<?php echo $bonuses_for_tooltip['tarcza']['hp_bonus']; ?>"
+                    data-damage="<?php echo $bonuses_for_tooltip['tarcza']['damage_bonus']; ?>"
+                    data-defense="<?php echo $bonuses_for_tooltip['tarcza']['defense_bonus']; ?>"
+                    data-agility="<?php echo $bonuses_for_tooltip['tarcza']['agility_bonus']; ?>"
+                    data-luck="<?php echo $bonuses_for_tooltip['tarcza']['luck_bonus']; ?>"
+                    data-block="<?php echo $bonuses_for_tooltip['tarcza']['block_bonus']; ?>" />
             <?php else: ?>
                 <img src="items/tarcza_slot.png" alt="Pusty slot tarcza" />
             <?php endif; ?>
         </div>
 
+
         <div id="trinket" class="slot">
             <?php if (!empty($all_slots['trinket'])): ?>
                 <img src="items/<?php echo htmlspecialchars($all_slots['trinket']['photo']); ?>"
-                     alt="<?php echo htmlspecialchars($all_slots['trinket']['name']); ?>"
-                     draggable="true"
-                     data-itemid="<?php echo (int)$all_slots['trinket']['item_id']; ?>" />
+                    alt="<?php echo htmlspecialchars($all_slots['trinket']['name']); ?>"
+                    draggable="true"
+                    data-itemid="<?php echo (int)$all_slots['trinket']['item_id']; ?>"
+                    data-name="<?php echo htmlspecialchars($all_slots['trinket']['name']); ?>"
+                    data-hp="<?php echo $bonuses_for_tooltip['trinket']['hp_bonus']; ?>"
+                    data-damage="<?php echo $bonuses_for_tooltip['trinket']['damage_bonus']; ?>"
+                    data-defense="<?php echo $bonuses_for_tooltip['trinket']['defense_bonus']; ?>"
+                    data-agility="<?php echo $bonuses_for_tooltip['trinket']['agility_bonus']; ?>"
+                    data-luck="<?php echo $bonuses_for_tooltip['trinket']['luck_bonus']; ?>"
+                    data-block="<?php echo $bonuses_for_tooltip['trinket']['block_bonus']; ?>" />
             <?php else: ?>
                 <img src="items/trinket_slot.png" alt="Pusty slot trinket" />
             <?php endif; ?>
         </div>
+
     </section>
 </div>
 
@@ -230,12 +331,20 @@ foreach ($bonuses as $key => $value) {
         <div id="<?php echo $key; ?>" class="slot">
             <?php if (!empty($all_slots[$key])): ?>
                 <img src="items/<?php echo htmlspecialchars($all_slots[$key]['photo']); ?>"
-                     alt="<?php echo htmlspecialchars($all_slots[$key]['name']); ?>"
-                     draggable="true"
-                     data-itemid="<?php echo (int)$all_slots[$key]['item_id']; ?>" />
+                    alt="<?php echo htmlspecialchars($all_slots[$key]['name']); ?>"
+                    draggable="true"
+                    data-itemid="<?php echo (int)$all_slots[$key]['item_id']; ?>"
+                    data-name="<?php echo htmlspecialchars($all_slots[$key]['name']); ?>"
+                    data-hp="<?php echo $bonuses_for_tooltip[$key]['hp_bonus']; ?>"
+                    data-damage="<?php echo $bonuses_for_tooltip[$key]['damage_bonus']; ?>"
+                    data-defense="<?php echo $bonuses_for_tooltip[$key]['defense_bonus']; ?>"
+                    data-agility="<?php echo $bonuses_for_tooltip[$key]['agility_bonus']; ?>"
+                    data-luck="<?php echo $bonuses_for_tooltip[$key]['luck_bonus']; ?>"
+                    data-block="<?php echo $bonuses_for_tooltip[$key]['block_bonus']; ?>" />
             <?php endif; ?>
         </div>
     <?php endfor; ?>
+
     <div id="statystyki">
         <h2>Statystyki postaci</h2>
         <ul>
@@ -254,7 +363,13 @@ foreach ($bonuses as $key => $value) {
     <p>WSZELKIE PRAWA ZASTRZEŻONE&copy;</p>
 </footer>
 
+<div id="tooltip"></div>
+
+
+
 <script src="ekwipunek.js"></script>
+<script src="tooltip.js"></script>
+
 <script>
 const toggleButton = document.getElementById("menuToggle");
 const dropdownMenu = document.getElementById("dropdownMenu");
@@ -263,5 +378,10 @@ toggleButton.addEventListener("click", () => {
     dropdownMenu.classList.toggle("show");
 });
 </script>
+
+<script>
+  const tooltipsData = <?php echo json_encode($tooltips_data, JSON_UNESCAPED_UNICODE); ?>;
+</script>
+
 </body>
 </html>
