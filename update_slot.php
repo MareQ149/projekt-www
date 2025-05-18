@@ -1,114 +1,146 @@
 <?php
 session_start();
+
+header('Content-Type: application/json');
+
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Nie zalogowano']);
-    exit();
+    echo json_encode(['success' => false, 'message' => 'Brak sesji']);
+    exit;
 }
+
 $user_id = $_SESSION['user_id'];
+
 $from_slot = $_POST['from_slot'] ?? '';
 $to_slot = $_POST['to_slot'] ?? '';
 $item_id = isset($_POST['item_id']) ? (int)$_POST['item_id'] : 0;
+
 if (!$from_slot || !$to_slot || !$item_id) {
-    echo json_encode(['success' => false, 'message' => 'Niepełne dane']);
-    exit();
+    echo json_encode(['success' => false, 'message' => 'Niepoprawne dane wejściowe']);
+    exit;
 }
+
 $conn = new mysqli("localhost", "root", "", "projekt_www");
 if ($conn->connect_error) {
-    echo json_encode(['success' => false, 'message' => 'Błąd połączenia']);
-    exit();
+    echo json_encode(['success' => false, 'message' => 'Błąd połączenia z bazą danych']);
+    exit;
 }
-$stmt = $conn->prepare("SELECT slot_type FROM items WHERE id = ?");
-$stmt->bind_param("i", $item_id);
-$stmt->execute();
-$result = $stmt->get_result();
-if ($result->num_rows === 0) {
-    echo json_encode(['success' => false, 'message' => 'Nie znaleziono itemu']);
-    exit();
-}
-$item = $result->fetch_assoc();
-$item_slot_type = $item['slot_type'];
-if (strpos($to_slot, 'slot') !== 0) { 
-    if ($to_slot !== $item_slot_type) {
-        echo json_encode(['success' => false, 'message' => 'Item nie pasuje do tego slotu']);
-        exit();
+
+$equipmentSlots = ['helm', 'napiersnik', 'buty', 'bron', 'tarcza', 'trinket'];
+
+$conn->begin_transaction();
+
+try {
+    // 1. Pobierz item_id z from_slot - potwierdzenie, że jest ten przedmiot
+    $stmt = $conn->prepare("SELECT item_id FROM inventory WHERE user_id = ? AND slot = ?");
+    $stmt->bind_param("is", $user_id, $from_slot);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $fromRow = $result->fetch_assoc();
+    $stmt->close();
+
+    if (!$fromRow || (int)$fromRow['item_id'] !== $item_id) {
+        throw new Exception("Przedmiot nie znajduje się w podanym slocie źródłowym");
     }
-    $new_status = 'equipped';
-} else {
-    $new_status = 'inventory';
-}
-$stmt_check = $conn->prepare("SELECT item_id FROM inventory WHERE user_id = ? AND slot = ?");
-$stmt_check->bind_param("is", $user_id, $to_slot);
-$stmt_check->execute();
-$res_check = $stmt_check->get_result();
-if ($res_check->num_rows > 0) {
-    $row = $res_check->fetch_assoc();
-    $item_in_to_slot = $row['item_id'];
-    if ($item_in_to_slot !== null) {
-        $stmt2 = $conn->prepare("SELECT slot_type FROM items WHERE id = ?");
-        $stmt2->bind_param("i", $item_in_to_slot);
-        $stmt2->execute();
-        $res2 = $stmt2->get_result();
-        if ($res2->num_rows === 0) {
-            echo json_encode(['success' => false, 'message' => 'Nie znaleziono itemu w celu zamiany']);
-            exit();
-        }
-        $item_to_slot = $res2->fetch_assoc();
-        $to_slot_type = $item_to_slot['slot_type'];
-        $stmt2->close();
-        if ($to_slot_type !== $item_slot_type) {
-            echo json_encode(['success' => false, 'message' => 'Ten slot jest zajęty innym typem itemu']);
-            exit();
-        }
-        $stmt3 = $conn->prepare("SELECT item_id, status FROM inventory WHERE user_id = ? AND slot = ?");
-        $stmt3->bind_param("is", $user_id, $from_slot);
-        $stmt3->execute();
-        $res3 = $stmt3->get_result();
-        if ($res3->num_rows === 0) {
-            echo json_encode(['success' => false, 'message' => 'Nie znaleziono itemu w from_slot']);
-            exit();
-        }
-        $from_item = $res3->fetch_assoc();
-        $stmt3->close();
-        $stmt4 = $conn->prepare("SELECT item_id, status FROM inventory WHERE user_id = ? AND slot = ?");
-        $stmt4->bind_param("is", $user_id, $to_slot);
-        $stmt4->execute();
-        $res4 = $stmt4->get_result();
-        if ($res4->num_rows === 0) {
-            echo json_encode(['success' => false, 'message' => 'Nie znaleziono itemu w to_slot']);
-            exit();
-        }
-        $to_item = $res4->fetch_assoc();
-        $stmt4->close();
-        $stmt_update = $conn->prepare("UPDATE inventory SET item_id = ?, status = ? WHERE user_id = ? AND slot = ?");
-        $stmt_update->bind_param("siss", $to_item['item_id'], $to_item['status'], $user_id, $from_slot);
-        $stmt_update->execute();
-        $stmt_update->bind_param("siss", $from_item['item_id'], $new_status, $user_id, $to_slot);
-        $stmt_update->execute();
-        $stmt_update->close();
-        echo json_encode(['success' => true]);
-        $conn->close();
-        exit();
+
+    // 2. Sprawdź typ przedmiotu, czy pasuje do slotu
+    $stmt = $conn->prepare("SELECT slot_type FROM items WHERE id = ?");
+    $stmt->bind_param("i", $item_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $itemInfo = $result->fetch_assoc();
+    $stmt->close();
+
+    if (!$itemInfo) {
+        throw new Exception("Nie znaleziono przedmiotu w bazie");
     }
+
+    $itemSlotType = $itemInfo['slot_type'];
+
+    if (in_array($to_slot, $equipmentSlots) && $to_slot !== $itemSlotType) {
+        throw new Exception("Przedmiot typu '$itemSlotType' nie pasuje do slotu '$to_slot'");
+    }
+
+    // 3. Pobierz item_id z to_slot (może być NULL)
+    $stmt = $conn->prepare("SELECT item_id FROM inventory WHERE user_id = ? AND slot = ?");
+    $stmt->bind_param("is", $user_id, $to_slot);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $toRow = $result->fetch_assoc();
+    $stmt->close();
+
+    $toSlotItemId = $toRow ? $toRow['item_id'] : null;
+
+    // 4. Zamiana item_id między slotami
+    $stmt = $conn->prepare("UPDATE inventory SET item_id = ? WHERE user_id = ? AND slot = ?");
+    $stmt->bind_param("iis", $item_id, $user_id, $to_slot);
+    $stmt->execute();
+    $stmt->close();
+
+    if ($toSlotItemId !== null) {
+        $stmt = $conn->prepare("UPDATE inventory SET item_id = ? WHERE user_id = ? AND slot = ?");
+        $stmt->bind_param("iis", $toSlotItemId, $user_id, $from_slot);
+        $stmt->execute();
+        $stmt->close();
+    } else {
+        $stmt = $conn->prepare("UPDATE inventory SET item_id = NULL WHERE user_id = ? AND slot = ?");
+        $stmt->bind_param("is", $user_id, $from_slot);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    // 5. Oblicz statystyki tylko z ekwipunku
+    $placeholders = implode(',', array_fill(0, count($equipmentSlots), '?'));
+
+    $sql = "SELECT ib.hp_bonus, ib.damage_bonus, ib.defense_bonus, ib.agility_bonus, ib.luck_bonus, ib.block_bonus
+            FROM inventory inv
+            JOIN item_bonuses ib ON inv.item_id = ib.item_id
+            WHERE inv.user_id = ? AND inv.slot IN ($placeholders) AND inv.item_id IS NOT NULL";
+
+    $stmt = $conn->prepare($sql);
+    $types = 'i' . str_repeat('s', count($equipmentSlots));
+    $params = array_merge([$user_id], $equipmentSlots);
+    $bind_params = [];
+    foreach ($params as $key => $value) {
+        $bind_params[$key] = &$params[$key];
+    }
+    array_unshift($bind_params, $types);
+    call_user_func_array([$stmt, 'bind_param'], $bind_params);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $stats = [
+        'hp' => 0,
+        'damage' => 0,
+        'defense' => 0,
+        'agility' => 0,
+        'luck' => 0,
+        'block' => 0
+    ];
+
+    while ($row = $result->fetch_assoc()) {
+        $stats['hp'] += (int)$row['hp_bonus'];
+        $stats['damage'] += (int)$row['damage_bonus'];
+        $stats['defense'] += (int)$row['defense_bonus'];
+        $stats['agility'] += (int)$row['agility_bonus'];
+        $stats['luck'] += (int)$row['luck_bonus'];
+        $stats['block'] += (int)$row['block_bonus'];
+    }
+
+    $stmt->close();
+
+    $conn->commit();
+
+    $swappedItem = null;
+    if ($toSlotItemId !== null) {
+        $swappedItem = ['item_id' => (int)$toSlotItemId];
+    }
+
+    echo json_encode(['success' => true, 'stats' => $stats, 'swapped_item' => $swappedItem]);
+
+} catch (Exception $e) {
+    $conn->rollback();
+    echo json_encode(['success' => false, 'message' => 'Błąd: ' . $e->getMessage()]);
 }
-$stmt_clear = $conn->prepare("UPDATE inventory SET item_id = NULL, status = 'empty' WHERE user_id = ? AND slot = ?");
-$stmt_clear->bind_param("is", $user_id, $from_slot);
-$stmt_clear->execute();
-$stmt_clear->close();
-$stmt_check = $conn->prepare("SELECT id FROM inventory WHERE user_id = ? AND slot = ?");
-$stmt_check->bind_param("is", $user_id, $to_slot);
-$stmt_check->execute();
-$res_check = $stmt_check->get_result();
-if ($res_check->num_rows > 0) {
-    $stmt_update = $conn->prepare("UPDATE inventory SET item_id = ?, status = ? WHERE user_id = ? AND slot = ?");
-    $stmt_update->bind_param("isis", $item_id, $new_status, $user_id, $to_slot);
-    $stmt_update->execute();
-    $stmt_update->close();
-} else {
-    $stmt_insert = $conn->prepare("INSERT INTO inventory (user_id, item_id, slot, status) VALUES (?, ?, ?, ?)");
-    $stmt_insert->bind_param("iiss", $user_id, $item_id, $to_slot, $new_status);
-    $stmt_insert->execute();
-    $stmt_insert->close();
-}
-$stmt_check->close();
+
 $conn->close();
-echo json_encode(['success' => true]);
