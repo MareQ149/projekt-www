@@ -14,23 +14,20 @@ $user = $_POST['rusername'] ?? '';
 $passRaw = $_POST['rpassword'] ?? '';
 $rank = 'gracz';
 
-// Prosta walidacja
 if (empty($user) || empty($passRaw)) {
     header("Location: index.html");
     exit();
 }
 
-// Hashowanie hasła
 $pass = password_hash($passRaw, PASSWORD_DEFAULT);
 
-// Sprawdzenie czy użytkownik już istnieje
+// Sprawdź, czy użytkownik już istnieje
 $stmt = $conn->prepare("SELECT id FROM uzytkownicy WHERE username = ?");
 $stmt->bind_param("s", $user);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    // Użytkownik już istnieje, wracamy na start
     $stmt->close();
     $conn->close();
     header("Location: index.html");
@@ -38,7 +35,7 @@ if ($result->num_rows > 0) {
 }
 $stmt->close();
 
-// Dodanie nowego użytkownika
+// Dodaj użytkownika
 $stmt = $conn->prepare("INSERT INTO uzytkownicy (username, password, rank) VALUES (?, ?, ?)");
 $stmt->bind_param("sss", $user, $pass, $rank);
 
@@ -46,7 +43,7 @@ if ($stmt->execute()) {
     $user_id = $conn->insert_id;
     $stmt->close();
 
-    // Dodanie pustych slotów do inventory (item_id NULL)
+    // Inicjalizacja pustych slotów
     $slots = ['helm', 'napiersnik', 'buty', 'bron', 'tarcza', 'trinket'];
     for ($i = 1; $i <= 10; $i++) {
         $slots[] = 'slot' . $i;
@@ -59,22 +56,13 @@ if ($stmt->execute()) {
     }
     $stmt2->close();
 
-    // Domyślne statystyki postaci
-    $hp = 100;
-    $damage = 10;
-    $defense = 5;
-    $agility = 5;
-    $luck = 3;
-    $block = 0;
-    $credits = 0;
-
-    $stmt3 = $conn->prepare("INSERT INTO postacie (user_id, hp, damage, defense, agility, luck, block, credits) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt3->bind_param("iiiiiiii", $user_id, $hp, $damage, $defense, $agility, $luck, $block, $credits);
+    // Wstaw statystyki postaci – tylko user_id, reszta z DEFAULT
+    $stmt3 = $conn->prepare("INSERT INTO postacie (user_id) VALUES (?)");
+    $stmt3->bind_param("i", $user_id);
     $stmt3->execute();
     $stmt3->close();
 
     $conn->close();
-
     header("Location: index.html");
     exit();
 

@@ -13,13 +13,14 @@ if ($conn->connect_error) {
 }
 
 // Pobranie statystyk postaci
-$stmt = $conn->prepare("SELECT hp, damage, defense, agility, luck, block FROM postacie WHERE user_id = ?");
+$stmt = $conn->prepare("SELECT hp, damage, defense, agility, luck, block, credits FROM postacie WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $stats = $result->fetch_assoc() ?: [
     'hp' => 0, 'damage' => 0, 'defense' => 0,
-    'agility' => 0, 'luck' => 0, 'block' => 0
+    'agility' => 0, 'luck' => 0, 'block' => 0,
+    'credits' => 0
 ];
 $stmt->close();
 
@@ -244,6 +245,7 @@ foreach ($bonuses as $key => $value) {
             <li>Zręczność: <?php echo $stats['agility']; ?></li>
             <li>Szczęście: <?php echo $stats['luck']; ?></li>
             <li>Blok: <?php echo $stats['block']; ?></li>
+            <li>Kredytki: <?php echo $stats['credits']; ?></li>
         </ul>
     </div>
 </div>
