@@ -11,6 +11,34 @@ function getItemImageSrc(itemId) {
 }
 
 document.querySelectorAll('.slot img').forEach(img => {
+    const slot = img.parentElement.id;
+
+    // Usuwanie itemów z inventory (slot1...slot10)
+    if (slot.startsWith('slot')) {
+        img.addEventListener('click', () => {
+            if (confirm("Czy na pewno chcesz pozbyć się przedmiotu?")) {
+                fetch('remove_item.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        slot: slot,
+                        item_id: img.dataset.itemid
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Błąd: ' + data.message);
+                    }
+                })
+                .catch(() => alert('Błąd sieci'));
+            }
+        });
+    }
+
+    // Draggable - Twój istniejący kod
     img.addEventListener('dragstart', e => {
         const fromSlot = e.target.parentElement.id;
         e.dataTransfer.setData('text/plain', JSON.stringify({
@@ -51,7 +79,7 @@ document.querySelectorAll('.slot').forEach(slot => {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                location.reload(); // szybkie odświeżenie — możesz tu wprowadzić soft reload
+                location.reload();
             } else {
                 alert('Błąd: ' + data.message);
             }
