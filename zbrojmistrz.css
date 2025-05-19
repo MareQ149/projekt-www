@@ -113,3 +113,18 @@ header {
 #dropdownMenu li a:hover {
   background-color: #555;
 }
+
+#tooltip {
+  position: absolute;
+  display: none;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  pointer-events: none;
+  font-size: 14px;
+  max-width: 220px;
+  z-index: 1000;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  line-height: 1.3;
+}
