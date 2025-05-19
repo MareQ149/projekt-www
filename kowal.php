@@ -32,23 +32,7 @@ if ($result) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kowal</title>
     <link rel="stylesheet" href="kowal.css" />
-    <style>
-      /* Minimalny CSS do tooltipa */
-      #tooltip {
-        position: absolute;
-        display: none;
-        background: rgba(0,0,0,0.8);
-        color: #fff;
-        padding: 8px 12px;
-        border-radius: 6px;
-        pointer-events: none;
-        font-size: 14px;
-        max-width: 220px;
-        z-index: 1000;
-        box-shadow: 0 0 6px rgba(0,0,0,0.3);
-        line-height: 1.3;
-      }
-    </style>
+    
 </head>
 <body>
 <nav class="menu-wrapper">
@@ -56,7 +40,7 @@ if ($result) {
     <div id="dropdownMenu" class="hidden">
     <ul>
         <li><a href="stronka.php">Profil</a></li>
-        <li><a href="zbrojmistrz.html">Zbrojmistrz</a></li>
+        <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
         <li><a href="kowal.php">Kowal</a></li>
         <li><a href="walka.html">Walka</a></li>
         <li><a href="logout.php">Wyloguj</a></li>
