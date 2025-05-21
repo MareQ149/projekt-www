@@ -19,27 +19,41 @@
     </ul>
     </div>
 </nav>
-    <h1>WITAJ NA ARENIE</h1>
-    <h3>Tutaj udowodnisz swoją wartość i pokażesz na co cię stać</h3>
-    <div id="srodkowanie">
-        <button id="przycisk_walka">Szukaj przeciwnika</button>
+    <div id="napis">
+        <h1>WITAJ NA ARENIE</h1>
+        <h3>Tutaj udowodnisz swoją wartość i pokażesz na co cię stać</h3>
     </div>
+    <button id="przycisk_walka">Szukaj przeciwnika</button>
     <div id="walka" class="hidden">
-        <section id="postac">
-            siema
-        </section>
-        <section id="wrog">
-            zwykly wrog
-        </section>
-        <section id="statystyki_postac">
-            no
-        </section>
-        <section id="statystyki_wrog">
-            gcbw
-        </section>
-        <section id="panel_glowny">
+        <img src="photos/logo.jpg" id="postac">
+        <img src="photos/bpp.jpg" id="wrog">
+        <div id="statystyki_postac">
+        <h2>Statystyki postaci</h2>
+            <ul>
+                <li>HP: 1</li>
+                <li>Obrażenia: 1</li>
+                <li>Obrona: 1</li>
+                <li>Zręczność: 1</li>
+                <li>Szczęście: 1</li>
+                <li>Blok: 1</li>
+                <li>Kredytki: 1</li>
+            </ul>
+        </div>
+        <div id="statystyki_wrog">
+        <h2>Statystyki wroga</h2>
+            <ul>
+                <li>HP: 1</li>
+                <li>Obrażenia: 1</li>
+                <li>Obrona: 1</li>
+                <li>Zręczność: 1</li>
+                <li>Szczęście: 1</li>
+                <li>Blok: 1</li>
+                <li>Kredytki: 1</li>
+            </ul>
+        </div>
+        <div id="panel_glowny">
             be be beng
-        </section>
+        </div>
     </div>
     <script>
         const toggleButton = document.getElementById("menuToggle");
@@ -53,8 +67,7 @@
 
         walkabutton.addEventListener("click", function(){
             console.log("Kliknięto przycisk walki");
-            walkadiv.classList.remove("hidden");
-            walkabutton.style.display = "none";});
+            walkadiv.classList.remove("hidden");});
     </script>
 </body>
 </html>
