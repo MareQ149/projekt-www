@@ -50,7 +50,7 @@ while ($row = $result_all->fetch_assoc()) {
 }
 $stmt_all->close();
 
-// --- NOWA CZĘŚĆ: pobranie danych do tooltipów (nazwa + bonusy) ---
+//pobranie danych do tooltipów (nazwa + bonusy) 
 $sql_tooltip = "
     SELECT i.id as item_id, i.name, 
            COALESCE(b.hp_bonus, 0) as hp_bonus,
@@ -92,7 +92,7 @@ if (count($equipmentSlots) > 0) {
     $placeholders = implode(',', array_fill(0, count($equipmentSlots), '?'));
     $types = str_repeat('s', count($equipmentSlots));
     
-    // Budowanie zapytania z parametrami slotów i user_id
+    
     $sql_eq = "
         SELECT inv.slot, i.id as item_id
         FROM inventory inv
@@ -102,9 +102,9 @@ if (count($equipmentSlots) > 0) {
 
     $stmt_eq = $conn->prepare($sql_eq);
 
-    // bind_param wymaga referencji i typów: 'i' + sloty jako stringi
+    
     $params = array_merge([$user_id], $equipmentSlots);
-    $types_all = 'i' . $types; // user_id jako int + sloty jako stringi
+    $types_all = 'i' . $types; 
 
     $bind_params = [];
     foreach ($params as $k => $v) {
