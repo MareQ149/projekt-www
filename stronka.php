@@ -122,6 +122,9 @@ if (count($equipmentSlots) > 0) {
             $item_ids_for_stats[] = $row['item_id'];
         }
     }
+    
+    
+
     $stmt_eq->close();
 } else {
     $item_ids_for_stats = [];
@@ -146,6 +149,7 @@ if (!empty($item_ids_for_stats)) {
             $value += (int)$row[$key];
         }
     }
+    
     $stmt_bonus->close();
 }
 
