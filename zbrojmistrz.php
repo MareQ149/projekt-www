@@ -103,43 +103,43 @@ if ($result) {
         <div class="tarcze">Tarcze</div>
         <div class="tarcza-1">
             <img src="items/tarcza_wiking.png"
-            <?php if(isset($items_data['tarcza_wikinga'])): ?>
-                data-id="<?= htmlspecialchars($items_data['tarcza_wikinga']['id']) ?>"
-                data-price="<?= htmlspecialchars($items_data['tarcza_wikinga']['price']) ?>"
-                data-hp_bonus="<?= htmlspecialchars($items_data['tarcza_wikinga']['hp_bonus']) ?>"
-                data-damage_bonus="<?= htmlspecialchars($items_data['tarcza_wikinga']['damage_bonus']) ?>"
-                data-defense_bonus="<?= htmlspecialchars($items_data['tarcza_wikinga']['defense_bonus']) ?>"
-                data-agility_bonus="<?= htmlspecialchars($items_data['tarcza_wikinga']['agility_bonus']) ?>"
-                data-luck_bonus="<?= htmlspecialchars($items_data['tarcza_wikinga']['luck_bonus']) ?>"
-                data-block_bonus="<?= htmlspecialchars($items_data['tarcza_wikinga']['block_bonus']) ?>"
+            <?php if(isset($items_data['tarcza_wiking'])): ?>
+                data-id="<?= htmlspecialchars($items_data['tarcza_wiking']['id']) ?>"
+                data-price="<?= htmlspecialchars($items_data['tarcza_wiking']['price']) ?>"
+                data-hp_bonus="<?= htmlspecialchars($items_data['tarcza_wiking']['hp_bonus']) ?>"
+                data-damage_bonus="<?= htmlspecialchars($items_data['tarcza_wiking']['damage_bonus']) ?>"
+                data-defense_bonus="<?= htmlspecialchars($items_data['tarcza_wiking']['defense_bonus']) ?>"
+                data-agility_bonus="<?= htmlspecialchars($items_data['tarcza_wiking']['agility_bonus']) ?>"
+                data-luck_bonus="<?= htmlspecialchars($items_data['tarcza_wiking']['luck_bonus']) ?>"
+                data-block_bonus="<?= htmlspecialchars($items_data['tarcza_wiking']['block_bonus']) ?>"
             <?php endif; ?>
             >
         </div>
         <div class="tarcza-2">
             <img src="items/tarcza_rycerz.png"
-            <?php if(isset($items_data['tarcza_rycerza'])): ?>
-                data-id="<?= htmlspecialchars($items_data['tarcza_rycerza']['id']) ?>"
-                data-price="<?= htmlspecialchars($items_data['tarcza_rycerza']['price']) ?>"
-                data-hp_bonus="<?= htmlspecialchars($items_data['tarcza_rycerza']['hp_bonus']) ?>"
-                data-damage_bonus="<?= htmlspecialchars($items_data['tarcza_rycerza']['damage_bonus']) ?>"
-                data-defense_bonus="<?= htmlspecialchars($items_data['tarcza_rycerza']['defense_bonus']) ?>"
-                data-agility_bonus="<?= htmlspecialchars($items_data['tarcza_rycerza']['agility_bonus']) ?>"
-                data-luck_bonus="<?= htmlspecialchars($items_data['tarcza_rycerza']['luck_bonus']) ?>"
-                data-block_bonus="<?= htmlspecialchars($items_data['tarcza_rycerza']['block_bonus']) ?>"
+            <?php if(isset($items_data['tarcza_rycerz'])): ?>
+                data-id="<?= htmlspecialchars($items_data['tarcza_rycerz']['id']) ?>"
+                data-price="<?= htmlspecialchars($items_data['tarcza_rycerz']['price']) ?>"
+                data-hp_bonus="<?= htmlspecialchars($items_data['tarcza_rycerz']['hp_bonus']) ?>"
+                data-damage_bonus="<?= htmlspecialchars($items_data['tarcza_rycerz']['damage_bonus']) ?>"
+                data-defense_bonus="<?= htmlspecialchars($items_data['tarcza_rycerz']['defense_bonus']) ?>"
+                data-agility_bonus="<?= htmlspecialchars($items_data['tarcza_rycerz']['agility_bonus']) ?>"
+                data-luck_bonus="<?= htmlspecialchars($items_data['tarcza_rycerz']['luck_bonus']) ?>"
+                data-block_bonus="<?= htmlspecialchars($items_data['tarcza_rycerz']['block_bonus']) ?>"
             <?php endif; ?>
             >
         </div>
         <div class="tarcza-3">
             <img src="items/tarcza_zolnierz.png"
-            <?php if(isset($items_data['tarcza_zolnierza'])): ?>
-                data-id="<?= htmlspecialchars($items_data['tarcza_zolnierza']['id']) ?>"
-                data-price="<?= htmlspecialchars($items_data['tarcza_zolnierza']['price']) ?>"
-                data-hp_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierza']['hp_bonus']) ?>"
-                data-damage_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierza']['damage_bonus']) ?>"
-                data-defense_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierza']['defense_bonus']) ?>"
-                data-agility_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierza']['agility_bonus']) ?>"
-                data-luck_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierza']['luck_bonus']) ?>"
-                data-block_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierza']['block_bonus']) ?>"
+            <?php if(isset($items_data['tarcza_zolnierz'])): ?>
+                data-id="<?= htmlspecialchars($items_data['tarcza_zolnierz']['id']) ?>"
+                data-price="<?= htmlspecialchars($items_data['tarcza_zolnierz']['price']) ?>"
+                data-hp_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierz']['hp_bonus']) ?>"
+                data-damage_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierz']['damage_bonus']) ?>"
+                data-defense_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierz']['defense_bonus']) ?>"
+                data-agility_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierz']['agility_bonus']) ?>"
+                data-luck_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierz']['luck_bonus']) ?>"
+                data-block_bonus="<?= htmlspecialchars($items_data['tarcza_zolnierz']['block_bonus']) ?>"
             <?php endif; ?>
             >
         </div>
