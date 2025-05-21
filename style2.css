@@ -78,7 +78,6 @@ body {
     align-items: center;
     justify-self: center;
     align-self: center;
-    height: 100%;
     padding: 10px;
     background-color: lightgray;
     border: 2px solid black;
@@ -133,9 +132,8 @@ body {
   min-height: 150px;
 }
 
-/* Kolorowanie slotów */
-#slot1 { background-color: red; }
-#slot2 { background-color: blue; }
+#slot1,#slot2,#slot3,#slot4,#slot5,#slot6,#slot7,#slot8,#slot9,#slot10 { background-image: url(photos/wood.jpg); background-size: cover; }
+/* #slot2 { background-color: blue; }
 #slot3 { background-color: green; }
 #slot4 { background-color: yellow; }
 #slot5 { background-color: purple; }
@@ -143,7 +141,7 @@ body {
 #slot7 { background-color: pink; }
 #slot8 { background-color: lightblue; }
 #slot9 { background-color: lightgreen; }
-#slot10 { background-color: brown; }
+#slot10 { background-color: brown; } */
 
 #staty .slot img {
   max-width: 100%;
