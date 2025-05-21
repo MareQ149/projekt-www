@@ -52,7 +52,8 @@
             </ul>
         </div>
         <div id="panel_glowny">
-            be be beng
+            <button id="walcz">Atakuj</button>
+            <button id="ucieczka">Uciekaj</button>
         </div>
     </div>
     <script>
@@ -67,7 +68,8 @@
 
         walkabutton.addEventListener("click", function(){
             console.log("Kliknięto przycisk walki");
-            walkadiv.classList.remove("hidden");});
+            walkadiv.classList.remove("hidden");
+            walkabutton.style.display="none";});
     </script>
 </body>
 </html>
