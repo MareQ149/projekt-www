@@ -324,26 +324,28 @@ foreach ($all_slots as $slot => $item) {
     </section>
 </div>
 
-<div id="staty">
-    <?php for ($i = 1; $i <= 10; $i++):
-        $key = 'slot' . $i;
-    ?>
-        <div id="<?php echo $key; ?>" class="slot">
-            <?php if (!empty($all_slots[$key])): ?>
-                <img src="items/<?php echo htmlspecialchars($all_slots[$key]['photo']); ?>"
-                    alt="<?php echo htmlspecialchars($all_slots[$key]['name']); ?>"
-                    draggable="true"
-                    data-itemid="<?php echo (int)$all_slots[$key]['item_id']; ?>"
-                    data-name="<?php echo htmlspecialchars($all_slots[$key]['name']); ?>"
-                    data-hp="<?php echo $bonuses_for_tooltip[$key]['hp_bonus']; ?>"
-                    data-damage="<?php echo $bonuses_for_tooltip[$key]['damage_bonus']; ?>"
-                    data-defense="<?php echo $bonuses_for_tooltip[$key]['defense_bonus']; ?>"
-                    data-agility="<?php echo $bonuses_for_tooltip[$key]['agility_bonus']; ?>"
-                    data-luck="<?php echo $bonuses_for_tooltip[$key]['luck_bonus']; ?>"
-                    data-block="<?php echo $bonuses_for_tooltip[$key]['block_bonus']; ?>" />
-            <?php endif; ?>
-        </div>
-    <?php endfor; ?>
+<div id="container">
+    <div id="staty">
+        <?php for ($i = 1; $i <= 10; $i++):
+            $key = 'slot' . $i;
+        ?>
+            <div id="<?php echo $key; ?>" class="slot">
+                <?php if (!empty($all_slots[$key])): ?>
+                    <img src="items/<?php echo htmlspecialchars($all_slots[$key]['photo']); ?>"
+                        alt="<?php echo htmlspecialchars($all_slots[$key]['name']); ?>"
+                        draggable="true"
+                        data-itemid="<?php echo (int)$all_slots[$key]['item_id']; ?>"
+                        data-name="<?php echo htmlspecialchars($all_slots[$key]['name']); ?>"
+                        data-hp="<?php echo $bonuses_for_tooltip[$key]['hp_bonus']; ?>"
+                        data-damage="<?php echo $bonuses_for_tooltip[$key]['damage_bonus']; ?>"
+                        data-defense="<?php echo $bonuses_for_tooltip[$key]['defense_bonus']; ?>"
+                        data-agility="<?php echo $bonuses_for_tooltip[$key]['agility_bonus']; ?>"
+                        data-luck="<?php echo $bonuses_for_tooltip[$key]['luck_bonus']; ?>"
+                        data-block="<?php echo $bonuses_for_tooltip[$key]['block_bonus']; ?>" />
+                <?php endif; ?>
+            </div>
+        <?php endfor; ?>
+    </div>
 
     <div id="statystyki">
         <h2>Statystyki postaci</h2>
