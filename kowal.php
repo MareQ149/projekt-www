@@ -29,11 +29,10 @@ if ($result) {
 <html lang="pl">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Tutaj zakupisz bron dla swej postaci">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Kowal</title>
     <link rel="stylesheet" href="kowal.css" />
-    <link rel="icon" href="photos/logo.jpg" type="image/jpg">
+    
 </head>
 <body>
 <nav class="menu-wrapper">
@@ -65,7 +64,7 @@ if ($result) {
 <div id="sklep">
     <div class="buty">Buty</div>
     <div class="buty-1">
-      <img src="items/buty_wiking.png" alt="buty_wikinga"
+      <img src="items/buty_wiking.png"
       <?php if(isset($items_data['buty_wiking'])): ?>
         data-id="<?= htmlspecialchars($items_data['buty_wiking']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['buty_wiking']['price']) ?>"
@@ -79,7 +78,7 @@ if ($result) {
       >
     </div>
     <div class="buty-2">
-      <img src="items/buty_rycerz.png" alt="buty_rycerza"
+      <img src="items/buty_rycerz.png"
       <?php if(isset($items_data['buty_rycerz'])): ?>
         data-id="<?= htmlspecialchars($items_data['buty_rycerz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['buty_rycerz']['price']) ?>"
@@ -93,7 +92,7 @@ if ($result) {
       >
     </div>
     <div class="buty-3">
-      <img src="items/buty_zolnierz.png" alt="buty_zolnierza"
+      <img src="items/buty_zolnierz.png"
       <?php if(isset($items_data['buty_zolnierz'])): ?>
         data-id="<?= htmlspecialchars($items_data['buty_zolnierz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['buty_zolnierz']['price']) ?>"
@@ -109,7 +108,7 @@ if ($result) {
 
     <div class="zbroje">Zbroje</div>
     <div class="zbroja-1">
-      <img src="items/klata_wiking.png" alt="napiersnik_wikinga"
+      <img src="items/klata_wiking.png"
       <?php if(isset($items_data['klata_wiking'])): ?>
         data-id="<?= htmlspecialchars($items_data['klata_wiking']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['klata_wiking']['price']) ?>"
@@ -123,7 +122,7 @@ if ($result) {
       >
     </div>
     <div class="zbroja-2">
-      <img src="items/klata_rycerz.png" alt="napiersnik_rycerza"
+      <img src="items/klata_rycerz.png"
       <?php if(isset($items_data['klata_rycerz'])): ?>
         data-id="<?= htmlspecialchars($items_data['klata_rycerz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['klata_rycerz']['price']) ?>"
@@ -137,7 +136,7 @@ if ($result) {
       >
     </div>
     <div class="zbroja-3">
-      <img src="items/klata_zolnierz.png" alt="napiersnik_zolnierza"
+      <img src="items/klata_zolnierz.png"
       <?php if(isset($items_data['klata_zolnierz'])): ?>
         data-id="<?= htmlspecialchars($items_data['klata_zolnierz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['klata_zolnierz']['price']) ?>"
@@ -153,7 +152,7 @@ if ($result) {
 
     <div class="hełmy">Hełmy</div>
     <div class="hełm-1">
-      <img src="items/helm_wiking.png" alt="helm_wikinga"
+      <img src="items/helm_wiking.png"
       <?php if(isset($items_data['helm_wiking'])): ?>
         data-id="<?= htmlspecialchars($items_data['helm_wiking']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['helm_wiking']['price']) ?>"
@@ -167,7 +166,7 @@ if ($result) {
       >
     </div>
     <div class="hełm-2">
-      <img src="items/helm_rycerz.png" alt="helm_rycerza"
+      <img src="items/helm_rycerz.png"
       <?php if(isset($items_data['helm_rycerz'])): ?>
         data-id="<?= htmlspecialchars($items_data['helm_rycerz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['helm_rycerz']['price']) ?>"
@@ -181,7 +180,7 @@ if ($result) {
       >
     </div>
     <div class="hełm-3">
-      <img src="items/helm_zolnierz.png" alt="helm_zolnierza"
+      <img src="items/helm_zolnierz.png"
       <?php if(isset($items_data['helm_zolnierz'])): ?>
         data-id="<?= htmlspecialchars($items_data['helm_zolnierz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['helm_zolnierz']['price']) ?>"
