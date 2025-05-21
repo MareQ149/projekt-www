@@ -29,8 +29,10 @@ if ($result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tu kupisz bronie, tarcze i trinkety dla swej postaci">
     <title>Kowal</title>
     <link rel="stylesheet" href="zbrojmistrz.css"/>
+    <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
     <nav class="menu-wrapper">
@@ -59,7 +61,7 @@ if ($result) {
     <div id="sklep">
         <div class="bronie">Bronie</div>
         <div class="bron-1">
-            <img src="items/miecz.png"
+            <img src="items/miecz.png" alt="miecz"
             <?php if(isset($items_data['miecz'])): ?>
                 data-id="<?= htmlspecialchars($items_data['miecz']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['miecz']['price']) ?>"
@@ -73,7 +75,7 @@ if ($result) {
             >
         </div>
         <div class="bron-2">
-            <img src="items/mlot.png"
+            <img src="items/mlot.png" alt="mlot"
             <?php if(isset($items_data['mlot'])): ?>
                 data-id="<?= htmlspecialchars($items_data['mlot']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['mlot']['price']) ?>"
@@ -87,7 +89,7 @@ if ($result) {
             >
         </div>
         <div class="bron-3">
-            <img src="items/maczuga.png"
+            <img src="items/maczuga.png" alt="maczuga"
             <?php if(isset($items_data['maczuga'])): ?>
                 data-id="<?= htmlspecialchars($items_data['maczuga']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['maczuga']['price']) ?>"
@@ -102,7 +104,7 @@ if ($result) {
         </div>
         <div class="tarcze">Tarcze</div>
         <div class="tarcza-1">
-            <img src="items/tarcza_wiking.png"
+            <img src="items/tarcza_wiking.png" alt="tarcza wikinga"
             <?php if(isset($items_data['tarcza_wiking'])): ?>
                 data-id="<?= htmlspecialchars($items_data['tarcza_wiking']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['tarcza_wiking']['price']) ?>"
@@ -116,7 +118,7 @@ if ($result) {
             >
         </div>
         <div class="tarcza-2">
-            <img src="items/tarcza_rycerz.png"
+            <img src="items/tarcza_rycerz.png" alt="tarcza rycerza"
             <?php if(isset($items_data['tarcza_rycerz'])): ?>
                 data-id="<?= htmlspecialchars($items_data['tarcza_rycerz']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['tarcza_rycerz']['price']) ?>"
@@ -130,7 +132,7 @@ if ($result) {
             >
         </div>
         <div class="tarcza-3">
-            <img src="items/tarcza_zolnierz.png"
+            <img src="items/tarcza_zolnierz.png" alt="tarcza zolnierza"
             <?php if(isset($items_data['tarcza_zolnierz'])): ?>
                 data-id="<?= htmlspecialchars($items_data['tarcza_zolnierz']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['tarcza_zolnierz']['price']) ?>"
@@ -145,7 +147,7 @@ if ($result) {
         </div>
         <div class="trinkety">Trinkety</div>
         <div class="trinket-1">
-            <img src="items/znak.png"
+            <img src="items/znak.png" alt="znak"
             <?php if(isset($items_data['znak'])): ?>
                 data-id="<?= htmlspecialchars($items_data['znak']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['znak']['price']) ?>"
@@ -159,7 +161,7 @@ if ($result) {
             >
         </div>
         <div class="trinket-2">
-            <img src="items/flacha.png"
+            <img src="items/flacha.png" alt="flacha"
             <?php if(isset($items_data['flacha'])): ?>
                 data-id="<?= htmlspecialchars($items_data['flacha']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['flacha']['price']) ?>"
@@ -173,7 +175,7 @@ if ($result) {
             >
         </div>
         <div class="trinket-3">
-            <img src="items/bombie.png"
+            <img src="items/bombie.png" alt="bombie bombie"
             <?php if(isset($items_data['bombie'])): ?>
                 data-id="<?= htmlspecialchars($items_data['bombie']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['bombie']['price']) ?>"
@@ -186,7 +188,7 @@ if ($result) {
             <?php endif; ?>
             >
         </div>
-        <div class="zbrojmistrz"><img src="items/bombie.png"></div>
+        <div class="zbrojmistrz"><img src="items/bombie.png" alt="bombie bombie"></div>
     </div>
 
 <div id="tooltip"></div>
