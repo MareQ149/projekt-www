@@ -182,9 +182,11 @@ foreach ($all_slots as $slot => $item) {
 <html lang="pl">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Glowna strona, tutaj widzisz swoja postac, zalozysz nowo zakupione bronie i pancerz">
     <title>Gra - Ekwipunek</title>
     <link rel="stylesheet" href="style2.css" />
+    <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
 <header>
