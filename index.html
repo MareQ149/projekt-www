@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YASZNOG THE GAME</title>
+  <link rel="stylesheet" href="index.css" />
 </head>
 <body>
-    hello
+  <div id="header">
+    <img id="logo" src="photos/logo.jpg" alt="logo" />
+    <img id="napis" src="photos/napis.png" alt="yasznog" />
+  </div>
+
+  <div id="main">
+    <button id="loguj" onclick="showLoginForm()">Zaloguj się</button>
+    <button id="rejestruj" onclick="showRegisterForm()">Zarejestruj się</button>
+
+    <div id="loginForm" style="display:none;">
+      <h2>Logowanie</h2>
+      <form action="logowanie.php" method="POST">
+        <label for="username">Login:</label>
+        <input type="text" id="lusername" name="lusername" /><br /><br />
+        <label for="password">Hasło:</label>
+        <input type="password" id="lpassword" name="lpassword" /><br /><br />
+        <input type="submit" value="Zaloguj" />
+      </form>
+    </div>
+
+    <div id="registerForm" style="display:none;">
+      <h2>Rejestracja</h2>
+      <form id="registerFormElement">
+        <label for="rusername">Login:</label>
+        <input type="text" id="rusername" name="rusername" /><br /><br />
+        <label for="rpassword">Hasło:</label>
+        <input type="password" id="rpassword" name="rpassword" /><br /><br />
+        <input type="submit" value="Zarejestruj" />
+      </form>
+    </div>
+  </div>
+
+  <script src="skrypt.js"></script>
 </body>
 </html>

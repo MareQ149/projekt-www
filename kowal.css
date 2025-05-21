@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+header {
+  width: auto;
+  height: 20%;
+  text-align: center;
+}
+
+#sklep {
+  display: grid;
+  grid-template-columns: repeat(6,150px);
+  grid-template-rows: repeat(6,150px);
+  width: 65%;
+  height: 80%;
+  border: 5px solid black;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 10px;
+  gap: 10px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#sklep > div:not(.kowal) > img {
+  border: 2px solid black;
+  background-color: bisque;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.buty {
+  font-size: 40px;
+  grid-row: 1 / 2;
+  grid-column: 1 / span 3;
+}
+.buty-1{ grid-row: 2 / 3; grid-column: 1 / 2;}
+.buty-2{ grid-row: 2 / 3; grid-column: 2 / 3;}
+.buty-3{ grid-row: 2 / 3; grid-column: 3 / 4;}
+
+.zbroje {
+  font-size: 40px;
+  grid-row: 3 / 4;
+  grid-column: 1 / span 3;
+}
+.zbroja-1{grid-row: 4 / 5; grid-column: 1 / 2;}
+.zbroja-2{grid-row: 4 / 5; grid-column: 2 / 3;}
+.zbroja-3{grid-row: 4 / 5; grid-column: 3 / 4;}
+
+.hełmy {
+  font-size: 40px;
+  grid-row: 5 / 6;
+  grid-column: 1 / span 3;
+}
+.hełm-1{grid-row: 6 / 7; grid-column: 1 / 2;}
+.hełm-2{grid-row: 6 / 7; grid-column: 2 / 3;}
+.hełm-3{grid-row: 6 / 7; grid-column: 3 / 4;}
+
+.kowal{
+  grid-row: 1 / 7;
+  grid-column: 4 / 7;
+}
+
+.menu-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+#menuToggle {
+  background-color: #2c2c2c;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#dropdownMenu {
+  background-color: #333;
+  border: 2px solid #000;
+  border-radius: 6px;
+  margin-top: 8px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s ease;
+}
+
+#dropdownMenu.show {
+  max-height: 500px;
+}
+
+#dropdownMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#dropdownMenu li a {
+  display: block;
+  padding: 12px 16px;
+  color: white;
+  text-decoration: none;
+  border-top: 1px solid #555;
+}
+
+#dropdownMenu li a:hover {
+  background-color: #555;
+}
+
+#tooltip {
+  position: absolute;
+  display: none;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  pointer-events: none;
+  font-size: 14px;
+  max-width: 220px;
+  z-index: 1000;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  line-height: 1.3;
+}
