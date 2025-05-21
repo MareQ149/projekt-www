@@ -113,3 +113,20 @@ header {
 #dropdownMenu li a:hover {
   background-color: #555;
 }
+
+#tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+  display: none;
+  z-index: 10;
+}
+
+.tooltip-target:hover + #tooltip {
+  display: block;
+}
