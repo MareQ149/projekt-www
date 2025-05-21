@@ -1,0 +1,30 @@
+#walka-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+#postac, #wrog {
+  width: 250px;
+  height: 350px;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#postac img, #wrog img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#versus {
+  font-size: 60px;
+  font-weight: bold;
+  color: darkred;
+  user-select: none;
+}
