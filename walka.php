@@ -157,8 +157,15 @@ $conn->close();
         const przeciwnik = <?= json_encode($enemy_stats) ?>;
     </script>
 
-    <img src="photos/logo.jpg" id="postac" alt="Postać" />
-    <img src="<?= htmlspecialchars($enemy['photo']) ?>" alt="<?= htmlspecialchars($enemy['name']) ?>" id="wrog" />
+    <div class="avatar-container avatar-left">
+        <div class="avatar-name">yasznog</div>
+        <img src="photos/logo.jpg" id="postac" alt="Postać" />
+    </div>
+
+    <div class="avatar-container avatar-right">
+        <div class="avatar-name"><?= htmlspecialchars($enemy['name']) ?></div>
+        <img src="<?= htmlspecialchars($enemy['photo']) ?>" alt="<?= htmlspecialchars($enemy['name']) ?>" id="wrog" />
+    </div>
 
     <div id="statystyki_postac">
         <h2>Statystyki postaci</h2>
@@ -194,9 +201,7 @@ $conn->close();
 
     <div id="panel_glowny"></div>
 
-    <div id="akcje_walki">
-        <!-- Przyciski generowane w JS -->
-    </div>
+    <div id="akcje_walki"></div>
 </div>
 
 <script src="walka.js"></script>
