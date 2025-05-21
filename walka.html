@@ -19,21 +19,39 @@
     </ul>
     </div>
 </nav>
-<script>
-  const toggleButton = document.getElementById("menuToggle");
-  const dropdownMenu = document.getElementById("dropdownMenu");
-
-    toggleButton.addEventListener("click", () => {
-        dropdownMenu.classList.toggle("show");
-  });
-</script>
     <h1>WITAJ NA ARENIE</h1>
-    <h3>Tutaj udowodnisz swoją wartość i pokażesz an co cię stać</h3>
-    <section id="postac">
+    <h3>Tutaj udowodnisz swoją wartość i pokażesz na co cię stać</h3>
+    <button id="przycisk_walka">Szukaj przeciwnika</button>
+    <div id="walka" class="hidden">
+        <section id="postac">
+            siema
+        </section>
+        <section id="wrog">
+            zwykly wrog
+        </section>
+        <section id="statystyki_postac">
+            no
+        </section>
+        <section id="statystyki_wrog">
+            gcbw
+        </section>
+        <section id="panel_glowny">
+            be be beng
+        </section>
+    </div>
+    <script>
+        const toggleButton = document.getElementById("menuToggle");
+        const dropdownMenu = document.getElementById("dropdownMenu");
 
-    </section>
-    <section id="wrog">
+        toggleButton.addEventListener("click", () => {
+            dropdownMenu.classList.toggle("show");});
 
-    </section>
+        const walkabutton = document.getElementById("przycisk_walka");
+        const walkadiv = document.getElementById("walka");
+
+        walkabutton.addEventListener("click", function(){
+            console.log("Kliknięto przycisk walki");
+            walkadiv.classList.remove("hidden");});
+    </script>
 </body>
 </html>
