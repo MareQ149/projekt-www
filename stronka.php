@@ -200,7 +200,7 @@ foreach ($all_slots as $slot => $item) {
             <li><a href="stronka.php">Profil</a></li>
             <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
             <li><a href="kowal.php">Kowal</a></li>
-            <li><a href="walka.html">Walka</a></li>
+            <li><a href="walka.php">Walka</a></li>
             <li><a href="logout.php">Wyloguj</a></li>
         </ul>
     </div>
