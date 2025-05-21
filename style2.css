@@ -41,6 +41,14 @@ body {
   object-fit: contain;
 }
 
+#ekwipunek .slot {
+  border: 2px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1.5 / 1;
+}
+
 #helm, #napiersnik, #buty, #bron, #tarcza, #trinket {
     width: 100%;
     min-width: 21px;
@@ -305,21 +313,4 @@ footer {
 
 #dropdownMenu li a:hover {
   background-color: #555;
-}
-
-#tooltip {
-    position: absolute;
-    display: none;
-    pointer-events: none;
-    background-color: rgba(34, 34, 34, 0.9);
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    max-width: 250px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-    z-index: 1000;
-    line-height: 1.4;
-    user-select: none;
-    white-space: normal;
 }
