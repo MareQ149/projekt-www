@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Logowanie do gry YASZNOG">
   <title>YASZNOG THE GAME</title>
-  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="index.css"/>
+  <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
   <div id="header">
-    <img id="logo" src="photos/logo.jpg" alt="logo" />
-    <img id="napis" src="photos/napis.png" alt="yasznog" />
+    <a href="index.html"><img id="napis" src="photos/napis.png" alt="yasznog"/></a>
   </div>
 
   <div id="main">
@@ -25,6 +26,7 @@
         <input type="password" id="lpassword" name="lpassword" /><br /><br />
         <input type="submit" value="Zaloguj" />
       </form>
+      <button id="anulacja" onclick="window.location.href='index.html'">Anuluj</button>
     </div>
 
     <div id="registerForm" style="display:none;">
@@ -36,6 +38,7 @@
         <input type="password" id="rpassword" name="rpassword" /><br /><br />
         <input type="submit" value="Zarejestruj" />
       </form>
+      <button id="anulacja" onclick="window.location.href='index.html'">Anuluj</button>
     </div>
   </div>
 
