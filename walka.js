@@ -64,7 +64,7 @@ if (!window.btnAtakuj) {
         btnAtakuj.disabled = true;
         btnUcieczka.disabled = true;
 
-        wykonajAtak(player, enemy, "Yasznog", "Przeciwnik");
+        wykonajAtak(player, enemy, "Ty", "Przeciwnik");
         updateHpBar("enemy-hp-bar", "enemy-hp-text", enemy.hp, przeciwnik.hp);
 
         if (enemy.hp <= 0) {
