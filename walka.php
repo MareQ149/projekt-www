@@ -195,7 +195,7 @@ $conn->close();
     <div id="panel_glowny"></div>
 
     <div id="akcje_walki">
-        <!-- Przyciski generowane w JS -->
+       
     </div>
 </div>
 

@@ -12,6 +12,27 @@ function showRegisterForm() {
   document.getElementById("rejestruj").style.display = "none";
 }
 
+// Logowanie AJAX
+document.getElementById("loginFormElement").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+
+  fetch("logowanie.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.message);
+      if (data.success) {
+        window.location.href = "stronka.php";
+      }
+    })
+    .catch(() => alert("Błąd sieci"));
+});
+
+// Rejestracja AJAX
 document.getElementById("registerFormElement").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -21,13 +42,11 @@ document.getElementById("registerFormElement").addEventListener("submit", functi
     method: "POST",
     body: formData,
   })
-    .then((res) => res.json())
-    .then((data) => {
+    .then(res => res.json())
+    .then(data => {
+      alert(data.message);
       if (data.success) {
-        alert(data.message);
         window.location.href = "index.html";
-      } else {
-        alert("Błąd: " + data.message);
       }
     })
     .catch(() => alert("Błąd sieci"));
