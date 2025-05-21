@@ -21,7 +21,9 @@
 </nav>
     <h1>WITAJ NA ARENIE</h1>
     <h3>Tutaj udowodnisz swoją wartość i pokażesz na co cię stać</h3>
-    <button id="przycisk_walka">Szukaj przeciwnika</button>
+    <div id="srodkowanie">
+        <button id="przycisk_walka">Szukaj przeciwnika</button>
+    </div>
     <div id="walka" class="hidden">
         <section id="postac">
             siema
@@ -51,7 +53,8 @@
 
         walkabutton.addEventListener("click", function(){
             console.log("Kliknięto przycisk walki");
-            walkadiv.classList.remove("hidden");});
+            walkadiv.classList.remove("hidden");
+            walkabutton.style.display = "none";});
     </script>
 </body>
 </html>

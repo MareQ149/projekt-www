@@ -1,0 +1,9 @@
+#srodkowanie{
+    text-align: center;
+    margin-top: 20px;
+}
+#przycisk_walka{
+    display:block;
+    padding: 10px 20px;
+    font-size: 16px;
+}
