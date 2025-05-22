@@ -1,21 +1,29 @@
-function dodajKomunikat(tresc) {
+function dodajKomunikat(tresc, kolor = "czarny") {
     const panel = document.getElementById("panel_glowny");
     const p = document.createElement("p");
     p.textContent = tresc;
+    p.classList.add(kolor); // Użyj klasy CSS na podstawie parametru
     panel.appendChild(p);
     panel.scrollTop = panel.scrollHeight;
 }
 
+
+
 function wykonajAtak(atakujacy, broniacy, nazwaAtakujacego, nazwaBroniacego) {
+    if (atakujacy == player){
+        var kolor = "green";
+    }else {
+        var kolor = "red";
+    }
     // Sprawdzenie uniku
     if (Math.random() * 100 < broniacy.agility) {
-        dodajKomunikat(`${nazwaBroniacego} unika ataku ${nazwaAtakujacego}!`);
+        dodajKomunikat(`${nazwaBroniacego} unika ataku ${nazwaAtakujacego}!`, kolor);
         return false;
     }
     
     // Sprawdzenie bloku
     if (Math.random() * 100 < broniacy.block * 10) {
-        dodajKomunikat(`${nazwaBroniacego} blokuje atak ${nazwaAtakujacego}!`);
+        dodajKomunikat(`${nazwaBroniacego} blokuje atak ${nazwaAtakujacego}!`, kolor);
         return false;
     }
     
@@ -33,12 +41,12 @@ function wykonajAtak(atakujacy, broniacy, nazwaAtakujacego, nazwaBroniacego) {
     let czyKryt = Math.random() * 100 < atakujacy.luck * 5;
     if (czyKryt) {
         suroweObrazenia *= 2;
-        dodajKomunikat(`KRYTYCZNY ATAK! ${nazwaAtakujacego} zadaje podwójne obrażenia!`);
+        dodajKomunikat(`KRYTYCZNY ATAK! ${nazwaAtakujacego} zadaje podwójne obrażenia!`, "orange");
     }
     
     // Zadawanie obrażeń
     broniacy.hp -= suroweObrazenia;
-    dodajKomunikat(`${nazwaAtakujacego} zadaje ${suroweObrazenia} obrażeń ${nazwaBroniacego}.`);
+    dodajKomunikat(`${nazwaAtakujacego} zadaje ${suroweObrazenia} obrażeń ${nazwaBroniacego}.`, kolor);
     
     // Aktualizacja paska życia
     updateHpBar(
@@ -72,13 +80,13 @@ function aktualizujKredyty(zmiana) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            dodajKomunikat(`Twoje kredyty zostały zaktualizowane o ${zmiana > 0 ? '+' : ''}${zmiana}.`);
+            dodajKomunikat(`Twoje kredyty zostały zaktualizowane o ${zmiana > 0 ? '+' : ''}${zmiana}.`, "black");
         } else {
-            dodajKomunikat('Błąd podczas aktualizacji kredytów: ' + (data.error || 'Nieznany błąd'));
+            dodajKomunikat('Błąd podczas aktualizacji kredytów: ' + (data.error || 'Nieznany błąd', "black"));
         }
     })
     .catch(() => {
-        dodajKomunikat('Błąd połączenia podczas aktualizacji kredytów.');
+        dodajKomunikat('Błąd połączenia podczas aktualizacji kredytów.', "black");
     });
 }
 
