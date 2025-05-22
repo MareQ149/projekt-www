@@ -22,7 +22,9 @@ h2 {
 }
 
 /* Awatary i nazwy */
-.avatar-container {
+.avatar-container-left {
+  grid-column: 2 / 3;
+  grid-row: 2 / span 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +44,7 @@ h2 {
 
 .avatar-left {
   grid-column: 2 / 3;
-  grid-row: 2 / 4;
+  grid-row: 2 / span 2;
   min-width: 40px;
   max-width: 400px;
   min-height: 45px;
@@ -55,6 +57,20 @@ h2 {
   max-width: 100%;
   max-height: 100%;
   border-radius: 10px;
+}
+
+.avatar-container-right {
+  grid-column: 6 / 7;
+  grid-row: 2 / span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: lightgray;
+  border: 2px solid black;
+  border-radius: 10px;
+  color: #fff;
+  text-shadow: 1px 1px 3px black;
 }
 
 .avatar-right {
@@ -151,9 +167,13 @@ h2 {
 }
 
 #akcje_walki {
-    grid-row: 6 / 7;
+    grid-row: 2 / 3;
     grid-column: 4 / 5;
     text-align: center;
+    justify-content: end;
+    align-items: center;
+    justify-self: center;
+    align-self: end;
 }
 
 #akcje_walki button {
@@ -165,6 +185,7 @@ h2 {
     border: 2px solid black;
     background-color: #ffe;
     transition: background-color 0.2s ease;
+    text-align: center;
 }
 
 #akcje_walki button:hover:not(:disabled) {
@@ -211,4 +232,8 @@ h2 {
 
 #dropdownMenu li a:hover {
   background-color: #444;
+}
+
+#btn_zakoncz{
+  text-align: center !important;
 }
