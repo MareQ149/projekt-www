@@ -81,6 +81,7 @@ if (!empty($item_ids_for_stats)) {
     }
     $stmt_bonus->close();
 }
+unset($value); // <------------------TEN SKURWIEL JEBAŁ BLOCK_BONUS
 
 foreach ($bonuses as $key => $value) {
     $stat_key = str_replace('_bonus', '', $key);
