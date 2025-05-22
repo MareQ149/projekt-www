@@ -8,11 +8,13 @@ toggleButton.addEventListener("click", () => {
 
 const walkabutton = document.getElementById("przycisk_walka");
 const walkadiv = document.getElementById("walka");
-
+const napis = document.getElementById("napis");
+const menu = document.getElementById("menuToggle");
 walkabutton.addEventListener("click", function() {
     walkadiv.classList.remove("hidden");
     walkabutton.classList.add("hidden");
-
+    napis.classList.add("hidden");
+    menu.classList.add("hidden");
     // Kopia statystyk gracza i przeciwnika do modyfikacji w trakcie walki
     window.player = {...gracz};
     window.enemy = {...przeciwnik};

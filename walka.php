@@ -157,12 +157,12 @@ $conn->close();
         const przeciwnik = <?= json_encode($enemy_stats) ?>;
     </script>
 
-    <div class="avatar-container avatar-left">
+    <div class="avatar-container-left">
         <div class="avatar-name">yasznog</div>
         <img src="photos/logo.jpg" id="postac" alt="Postać" />
     </div>
 
-    <div class="avatar-container avatar-right">
+    <div class="avatar-container-right">
         <div class="avatar-name"><?= htmlspecialchars($enemy['name']) ?></div>
         <img src="<?= htmlspecialchars($enemy['photo']) ?>" alt="<?= htmlspecialchars($enemy['name']) ?>" id="wrog" />
     </div>
