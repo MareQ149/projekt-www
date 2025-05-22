@@ -94,11 +94,43 @@ if (!window.btnAtakuj) {
     });
 
     btnUcieczka.addEventListener("click", () => {
-        dodajKomunikat("Uciekłeś z walki!");
-        document.getElementById("walka").classList.add("hidden");
-        btnAtakuj.disabled = true;
-        btnUcieczka.disabled = true;
+        if (Math.random() < 0.5) {
+            alert("Uciekłeś z walki! Tracisz 50 kredytów.");
+
+            // Wyślij żądanie do PHP, by odjąć kredyty
+            fetch("update_credits.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "change=-50"
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload(); // Odśwież stronę po aktualizacji
+                } else {
+                    alert("Błąd przy aktualizacji kredytów: " + (data.error || "nieznany błąd"));
+                }
+            })
+            .catch(error => {
+                alert("Błąd połączenia z serwerem: " + error);
+            });
+
+        } else {
+            dodajKomunikat("Nie udało się uciec! Przeciwnik atakuje.");
+            btnAtakuj.disabled = true;
+            btnUcieczka.disabled = true;
+
+            setTimeout(() => {
+                wykonajAtak(przeciwnik, gracz, "Przeciwnik", "Ty");
+                btnAtakuj.disabled = false;
+                btnUcieczka.disabled = false;
+            }, 1000);
+        }
     });
+
+
 
     btnZakoncz.addEventListener("click", () => {
         // Możesz tu zrobić co chcesz, np:
