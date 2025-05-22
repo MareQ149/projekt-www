@@ -22,7 +22,7 @@ function wykonajAtak(atakujacy, broniacy, nazwaAtakujacego, nazwaBroniacego) {
     }
     
     // Sprawdzenie bloku
-    if (Math.random() * 100 < broniacy.block * 10) {
+    if (Math.random() * 100 < broniacy.block * 5) {
         dodajKomunikat(`${nazwaBroniacego} blokuje atak ${nazwaAtakujacego}!`, kolor);
         return false;
     }
