@@ -20,9 +20,15 @@ function wykonajAtak(atakujacy, broniacy, nazwaAtakujacego, nazwaBroniacego) {
     }
     
     // Obliczanie obrażeń
-    let suroweObrazenia = atakujacy.damage - broniacy.defense;
+    // Widełki ±20% na atakujacy.damage
+    const minBaseDamage = Math.floor(atakujacy.damage * 0.8);
+    const maxBaseDamage = Math.ceil(atakujacy.damage * 1.2);
+    const losoweDamage = Math.floor(Math.random() * (maxBaseDamage - minBaseDamage + 1)) + minBaseDamage;
+
+    // Obliczanie obrażeń po obronie
+    let suroweObrazenia = losoweDamage - broniacy.defense;
     suroweObrazenia = Math.max(1, suroweObrazenia);
-    
+        
     // Sprawdzenie krytyka
     let czyKryt = Math.random() * 100 < atakujacy.luck * 5;
     if (czyKryt) {
