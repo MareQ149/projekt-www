@@ -210,7 +210,7 @@ foreach ($all_slots as $slot => $item) {
         </ul>
     </div>
 </nav>
-<p><?php echo $stats['block']; ?></p>
+
 <div id="ekwipunek">
     <section id="lewy">
         <div id="helm" class="slot">
