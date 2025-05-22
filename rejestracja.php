@@ -79,3 +79,4 @@ $stmt->close();
 $conn->close();
 echo json_encode(['success' => true, 'message' => 'Rejestracja zakończona powodzeniem']);
 exit();
+?>

@@ -7,23 +7,44 @@ function dodajKomunikat(tresc) {
 }
 
 function wykonajAtak(atakujacy, broniacy, nazwaAtakujacego, nazwaBroniacego) {
+    // Sprawdzenie uniku
     if (Math.random() * 100 < broniacy.agility) {
         dodajKomunikat(`${nazwaBroniacego} unika ataku ${nazwaAtakujacego}!`);
         return false;
     }
+    
+    // Sprawdzenie bloku
     if (Math.random() * 100 < broniacy.block * 10) {
         dodajKomunikat(`${nazwaBroniacego} blokuje atak ${nazwaAtakujacego}!`);
         return false;
     }
-    const suroweObrazenia = atakujacy.damage - broniacy.defense;
-    const finalneObrazenia = Math.max(1, suroweObrazenia);
-    broniacy.hp -= finalneObrazenia;
-    dodajKomunikat(`${nazwaAtakujacego} zadaje ${finalneObrazenia} obrażeń ${nazwaBroniacego}.`);
-    updateHpBar(broniacy === enemy ? "enemy-hp-bar" : "player-hp-bar",
-                broniacy === enemy ? "enemy-hp-text" : "player-hp-text",
-                broniacy.hp, broniacy === enemy ? przeciwnik.hp : gracz.hp);
+    
+    // Obliczanie obrażeń
+    let suroweObrazenia = atakujacy.damage - broniacy.defense;
+    suroweObrazenia = Math.max(1, suroweObrazenia);
+    
+    // Sprawdzenie krytyka
+    let czyKryt = Math.random() * 100 < atakujacy.luck * 5;
+    if (czyKryt) {
+        suroweObrazenia *= 2;
+        dodajKomunikat(`KRYTYCZNY ATAK! ${nazwaAtakujacego} zadaje podwójne obrażenia!`);
+    }
+    
+    // Zadawanie obrażeń
+    broniacy.hp -= suroweObrazenia;
+    dodajKomunikat(`${nazwaAtakujacego} zadaje ${suroweObrazenia} obrażeń ${nazwaBroniacego}.`);
+    
+    // Aktualizacja paska życia
+    updateHpBar(
+        broniacy === enemy ? "enemy-hp-bar" : "player-hp-bar",
+        broniacy === enemy ? "enemy-hp-text" : "player-hp-text",
+        broniacy.hp,
+        broniacy === enemy ? przeciwnik.hp : gracz.hp
+    );
+    
     return true;
 }
+
 
 function updateHpBar(idBar, idText, currentHp, maxHp) {
     const bar = document.getElementById(idBar);
