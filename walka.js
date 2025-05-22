@@ -70,7 +70,7 @@ if (!window.btnAtakuj) {
         updateHpBar("enemy-hp-bar", "enemy-hp-text", enemy.hp, przeciwnik.hp);
 
         if (enemy.hp <= 0) {
-            dodajKomunikat("Pokonałeś przeciwnika!");
+            dodajKomunikat("Pokonałeś przeciwnika!", "green");
             aktualizujKredyty(30);
             koniecWalki();
             return;
@@ -81,7 +81,7 @@ if (!window.btnAtakuj) {
             updateHpBar("player-hp-bar", "player-hp-text", player.hp, gracz.hp);
 
             if (player.hp <= 0) {
-                dodajKomunikat("Zostałeś pokonany!");
+                dodajKomunikat("Zostałeś pokonany!", "red");
                 aktualizujKredyty(-10);
                 koniecWalki();
                 return;
@@ -118,12 +118,12 @@ if (!window.btnAtakuj) {
             });
 
         } else {
-            dodajKomunikat("Nie udało się uciec! Przeciwnik atakuje.");
+            dodajKomunikat("Nie udało się uciec! Przeciwnik atakuje.", "red");
             btnAtakuj.disabled = true;
             btnUcieczka.disabled = true;
 
             setTimeout(() => {
-                wykonajAtak(przeciwnik, gracz, "Przeciwnik", "Ty");
+                wykonajAtak(enemy, player, "Przeciwnik", "Ty");
                 btnAtakuj.disabled = false;
                 btnUcieczka.disabled = false;
             }, 1000);
