@@ -183,8 +183,10 @@ foreach ($all_slots as $slot => $item) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tu mozesz zalozyc na swoja postac przedmioty">
     <title>Gra - Ekwipunek</title>
     <link rel="stylesheet" href="style2.css" />
+    <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
 <header>
@@ -198,7 +200,7 @@ foreach ($all_slots as $slot => $item) {
             <li><a href="stronka.php">Profil</a></li>
             <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
             <li><a href="kowal.php">Kowal</a></li>
-            <li><a href="walka.html">Walka</a></li>
+            <li><a href="walka.php">Walka</a></li>
             <li><a href="logout.php">Wyloguj</a></li>
         </ul>
     </div>

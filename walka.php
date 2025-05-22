@@ -127,8 +127,10 @@ $conn->close();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tu udowodnisz swoja wartosc">
     <title>Walka</title>
     <link rel="stylesheet" href="walka.css" />
+    <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
 <nav class="menu-wrapper">
@@ -136,8 +138,8 @@ $conn->close();
     <div id="dropdownMenu" class="hidden">
         <ul>
             <li><a href="stronka.php">Profil</a></li>
-            <li><a href="zbrojmistrz.html">Zbrojmistrz</a></li>
-            <li><a href="kowal.html">Kowal</a></li>
+            <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
+            <li><a href="kowal.php">Kowal</a></li>
             <li><a href="walka.php">Walka</a></li>
             <li><a href="logout.php">Wyloguj</a></li>
         </ul>
