@@ -15,11 +15,10 @@ walkabutton.addEventListener("click", function() {
     walkabutton.classList.add("hidden");
     napis.classList.add("hidden");
     menu.classList.add("hidden");
-    // Kopia statystyk gracza i przeciwnika do modyfikacji w trakcie walki
     window.player = {...gracz};
     window.enemy = {...przeciwnik};
 
-    // Reset panelu i przycisków
+
     const panelGlowny = document.getElementById("panel_glowny");
     panelGlowny.innerHTML = "";
     
@@ -37,7 +36,7 @@ walkabutton.addEventListener("click", function() {
     updateHpBar("enemy-hp-bar", "enemy-hp-text", enemy.hp, przeciwnik.hp);
 });
 
-// Generowanie i wstawianie przycisków ataku i ucieczki (jeśli jeszcze nie ma)
+// Generowanie i wstawianie przycisków ataku i ucieczki
 if (!window.btnAtakuj) {
     const btnAtakuj = document.createElement("button");
     btnAtakuj.id = "btn_atakuj";
@@ -50,7 +49,7 @@ if (!window.btnAtakuj) {
     const btnZakoncz = document.createElement("button");
     btnZakoncz.id = "btn_zakoncz";
     btnZakoncz.textContent = "Zakończ";
-    btnZakoncz.classList.add("hidden");  // Na start ukryty
+    btnZakoncz.classList.add("hidden");
 
     const akcjeDiv = document.getElementById("akcje_walki");
     akcjeDiv.appendChild(btnAtakuj);
@@ -62,7 +61,6 @@ if (!window.btnAtakuj) {
     window.btnZakoncz = btnZakoncz;
 
     btnAtakuj.addEventListener("click", () => {
-        // Zablokuj przyciski natychmiast po kliknięciu
         btnAtakuj.disabled = true;
         btnUcieczka.disabled = true;
 
@@ -87,7 +85,6 @@ if (!window.btnAtakuj) {
                 return;
             }
 
-            // Jeśli gra trwa dalej, odblokuj przyciski do kolejnej tury
             btnAtakuj.disabled = false;
             btnUcieczka.disabled = false;
         }, 500);
@@ -96,8 +93,6 @@ if (!window.btnAtakuj) {
     btnUcieczka.addEventListener("click", () => {
         if (Math.random() < 0.5) {
             alert("Uciekłeś z walki! Tracisz 50 kredytów.");
-
-            // Wyślij żądanie do PHP, by odjąć kredyty
             fetch("update_credits.php", {
                 method: "POST",
                 headers: {
@@ -108,7 +103,7 @@ if (!window.btnAtakuj) {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    location.reload(); // Odśwież stronę po aktualizacji
+                    location.reload(); 
                 } else {
                     alert("Błąd przy aktualizacji kredytów: " + (data.error || "nieznany błąd"));
                 }
@@ -133,9 +128,6 @@ if (!window.btnAtakuj) {
 
 
     btnZakoncz.addEventListener("click", () => {
-        // Możesz tu zrobić co chcesz, np:
-        // - odświeżyć stronę
-        // - ukryć panel walki i pokazać przycisk szukaj przeciwnika
         window.location.reload();
     });
 }
