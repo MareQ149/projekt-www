@@ -1,11 +1,11 @@
 <?php
+//start sesji polaczenie z db, info o JSON
 session_start();
 
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['user_id'])) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Nie jesteś zalogowany']);
+    header("Location: index.html");
     exit;
 }
 
@@ -26,7 +26,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-// Zabezpieczenie - upewnij się, że kredyty nie spadną poniżej 0
+//Pobranie kredytów i ich aktualizacja (min 0)
 $stmt = $conn->prepare("SELECT credits FROM postacie WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();

@@ -2,7 +2,7 @@ function dodajKomunikat(tresc, kolor = "czarny") {
     const panel = document.getElementById("panel_glowny");
     const p = document.createElement("p");
     p.textContent = tresc;
-    p.classList.add(kolor); // Użyj klasy CSS na podstawie parametru
+    p.classList.add(kolor);
     panel.appendChild(p);
     panel.scrollTop = panel.scrollHeight;
 }
@@ -15,7 +15,7 @@ function wykonajAtak(atakujacy, broniacy, nazwaAtakujacego, nazwaBroniacego) {
     }else {
         var kolor = "red";
     }
-    // Sprawdzenie uniku
+    //Sprawdzenie uniku
     if (Math.random() * 100 < broniacy.agility) {
         dodajKomunikat(`${nazwaBroniacego} unika ataku ${nazwaAtakujacego}!`, kolor);
         return false;
@@ -27,28 +27,28 @@ function wykonajAtak(atakujacy, broniacy, nazwaAtakujacego, nazwaBroniacego) {
         return false;
     }
     
-    // Obliczanie obrażeń
-    // Widełki ±20% na atakujacy.damage
+    //Obliczanie obrażeń
+    //Widełki ±20% na atakujacy.damage
     const minBaseDamage = Math.floor(atakujacy.damage * 0.8);
     const maxBaseDamage = Math.ceil(atakujacy.damage * 1.2);
     const losoweDamage = Math.floor(Math.random() * (maxBaseDamage - minBaseDamage + 1)) + minBaseDamage;
 
-    // Obliczanie obrażeń po obronie
+    //Obliczanie obrażeń po obronie
     let suroweObrazenia = losoweDamage - broniacy.defense;
     suroweObrazenia = Math.max(1, suroweObrazenia);
         
-    // Sprawdzenie krytyka
+    //Sprawdzenie krytyka
     let czyKryt = Math.random() * 100 < atakujacy.luck * 5;
     if (czyKryt) {
         suroweObrazenia *= 2;
         dodajKomunikat(`KRYTYCZNY ATAK! ${nazwaAtakujacego} zadaje podwójne obrażenia!`, "orange");
     }
     
-    // Zadawanie obrażeń
+    //Zadawanie obrażeń
     broniacy.hp -= suroweObrazenia;
     dodajKomunikat(`${nazwaAtakujacego} zadaje ${suroweObrazenia} obrażeń ${nazwaBroniacego}.`, kolor);
     
-    // Aktualizacja paska życia
+    //Aktualizacja paska życia
     updateHpBar(
         broniacy === enemy ? "enemy-hp-bar" : "player-hp-bar",
         broniacy === enemy ? "enemy-hp-text" : "player-hp-text",
@@ -90,6 +90,6 @@ function aktualizujKredyty(zmiana) {
     });
 }
 
-// Inicjalizacja pasków HP na start
+//Inicjalizacja pasków HP na start
 updateHpBar("player-hp-bar", "player-hp-text", gracz.hp, gracz.hp);
 updateHpBar("enemy-hp-bar", "enemy-hp-text", przeciwnik.hp, przeciwnik.hp);

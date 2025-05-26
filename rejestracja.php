@@ -1,4 +1,5 @@
 <?php
+//polaczenie z baza danych, start sesji, informacja o formacie JSON
 session_start();
 header('Content-Type: application/json');
 
@@ -18,6 +19,7 @@ $user = $_POST['rusername'] ?? '';
 $passRaw = $_POST['rpassword'] ?? '';
 $rank = 'gracz';
 
+//obsluga pustego formularza
 if (empty($user) || empty($passRaw)) {
     echo json_encode(['success' => false, 'message' => 'Proszę podać login i hasło']);
     exit();
@@ -25,7 +27,7 @@ if (empty($user) || empty($passRaw)) {
 
 $pass = password_hash($passRaw, PASSWORD_DEFAULT);
 
-// Sprawdzenie czy użytkownik już istnieje
+// Sprawdzenie czy użytkownik nie istnieje
 $stmt = $conn->prepare("SELECT id FROM uzytkownicy WHERE username = ?");
 $stmt->bind_param("s", $user);
 $stmt->execute();
@@ -61,7 +63,7 @@ foreach ($equipmentSlots as $slot) {
     $stmt->close();
 }
 
-// Dodaj 10 slotów slot1 - slot10
+// Dodaj 10 slotów slot1 - slot10 inventory
 for ($i = 1; $i <= 10; $i++) {
     $slot = 'slot' . $i;
     $stmt = $conn->prepare("INSERT INTO inventory (user_id, slot, item_id) VALUES (?, ?, NULL)");

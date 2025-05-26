@@ -1,4 +1,5 @@
 <?php
+//polacznenie z db, start sesji
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.html");
@@ -23,7 +24,7 @@ $stats = $result->fetch_assoc() ?: [
 ];
 $stmt->close();
 
-// Pobieranie item_id z wybranych slotów
+//Pobranie item_id z wybranych slotów
 $equipmentSlots = ['helm', 'napiersnik', 'buty', 'bron', 'tarcza', 'trinket'];
 
 $item_ids_for_stats = [];
@@ -81,6 +82,7 @@ if (!empty($item_ids_for_stats)) {
     }
     $stmt_bonus->close();
 }
+unset($value); // <------------------TEN SKU*WIEL JEBAŁ BLOCK_BONUS
 
 foreach ($bonuses as $key => $value) {
     $stat_key = str_replace('_bonus', '', $key);
