@@ -40,7 +40,7 @@ $stmt = $conn->prepare("UPDATE postacie SET credits = ? WHERE user_id = ?");
 $stmt->bind_param("ii", $newCredits, $user_id);
 $stmt->execute();
 
-if ($stmt->affected_rows > 0) {
+if ($stmt->execute()) {
     echo json_encode(['success' => true]);
 } else {
     http_response_code(500);
