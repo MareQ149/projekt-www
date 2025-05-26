@@ -1,10 +1,11 @@
 <?php
+//info o JSON, start sesji polaczenie z db
 session_start();
 
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Brak sesji']);
+    header("Location: index.html");
     exit;
 }
 
@@ -14,6 +15,7 @@ $from_slot = $_POST['from_slot'] ?? '';
 $to_slot = $_POST['to_slot'] ?? '';
 $item_id = isset($_POST['item_id']) ? (int)$_POST['item_id'] : 0;
 
+//Sprawdzenie poprawnosci danych
 if (!$from_slot || !$to_slot || !$item_id) {
     echo json_encode(['success' => false, 'message' => 'Niepoprawne dane wejściowe']);
     exit;
@@ -30,7 +32,7 @@ $equipmentSlots = ['helm', 'napiersnik', 'buty', 'bron', 'tarcza', 'trinket'];
 $conn->begin_transaction();
 
 try {
-    // 1. Pobierz item_id z from_slot - potwierdzenie, że jest ten przedmiot
+    //Pobranie item_id z from_slot
     $stmt = $conn->prepare("SELECT item_id FROM inventory WHERE user_id = ? AND slot = ?");
     $stmt->bind_param("is", $user_id, $from_slot);
     $stmt->execute();
@@ -42,7 +44,7 @@ try {
         throw new Exception("Przedmiot nie znajduje się w podanym slocie źródłowym");
     }
 
-    // 2. Sprawdź typ przedmiotu, czy pasuje do slotu
+    //Czy item pasuje do slotu
     $stmt = $conn->prepare("SELECT slot_type FROM items WHERE id = ?");
     $stmt->bind_param("i", $item_id);
     $stmt->execute();
@@ -60,7 +62,7 @@ try {
         throw new Exception("Przedmiot typu '$itemSlotType' nie pasuje do slotu '$to_slot'");
     }
 
-    // 3. Pobierz item_id z to_slot (może być NULL)
+    //Pobranie itemu z to_slot
     $stmt = $conn->prepare("SELECT item_id FROM inventory WHERE user_id = ? AND slot = ?");
     $stmt->bind_param("is", $user_id, $to_slot);
     $stmt->execute();
@@ -70,7 +72,7 @@ try {
 
     $toSlotItemId = $toRow ? $toRow['item_id'] : null;
 
-    // 4. Zamiana item_id między slotami
+    //Zamiana itemow
     $stmt = $conn->prepare("UPDATE inventory SET item_id = ? WHERE user_id = ? AND slot = ?");
     $stmt->bind_param("iis", $item_id, $user_id, $to_slot);
     $stmt->execute();
@@ -88,7 +90,7 @@ try {
         $stmt->close();
     }
 
-    // 5. Oblicz statystyki tylko z ekwipunku
+    //PRzeliczenie statystyk na nowo
     $placeholders = implode(',', array_fill(0, count($equipmentSlots), '?'));
 
     $sql = "SELECT ib.hp_bonus, ib.damage_bonus, ib.defense_bonus, ib.agility_bonus, ib.luck_bonus, ib.block_bonus
