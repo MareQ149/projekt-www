@@ -129,8 +129,10 @@ $conn->close();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tu dowiedziesz swego mestwa">
     <title>Walka</title>
     <link rel="stylesheet" href="walka.css" />
+    <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
 <nav class="menu-wrapper">
@@ -149,9 +151,8 @@ $conn->close();
 <div id="napis">
     <h1>WITAJ NA ARENIE</h1>
     <h3>Tutaj udowodnisz swoją wartość i pokażesz na co cię stać</h3>
+    <button id="przycisk_walka">Szukaj przeciwnika</button>
 </div>
-
-<button id="przycisk_walka">Szukaj przeciwnika</button>
 
 <div id="walka" class="hidden">
     <script>
