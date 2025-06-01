@@ -140,7 +140,7 @@ h2 {
 
 #panel_glowny {
     grid-row: 3 / 6;
-    grid-column: 4 / 5;
+    grid-column: 3 / 6;
     background-color: #e8e8ff;
     border: 2px solid black;
     padding: 20px;
