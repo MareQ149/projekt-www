@@ -1,12 +1,18 @@
 body {
   margin: 0;
   font-family: sans-serif;
+  background-image: url(photos/kuznia.png);
+  background-size: cover;
+  background-position: center;
 }
 
 header {
   width: auto;
   height: 20%;
   text-align: center;
+}
+#napisik{
+  color: white;
 }
 
 #sklep {
@@ -26,6 +32,7 @@ header {
   text-align: center;
   justify-content: center;
   align-items: start; /* ważne, żeby nie wymuszać height: 100% */
+  background-color: #333;
 }
 
 #sklep > div:not(.kowal) > img {
@@ -38,6 +45,7 @@ header {
   background-image: url(photos/wood.jpg);
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 .buty,
@@ -50,6 +58,7 @@ header {
 .buty {
   grid-row: 1 / 2;
   grid-column: 1 / span 3;
+  color: white;
 }
 .buty-1{ grid-row: 2 / 3; grid-column: 1 / 2;}
 .buty-2{ grid-row: 2 / 3; grid-column: 2 / 3;}
@@ -58,6 +67,7 @@ header {
 .zbroje {
   grid-row: 3 / 4;
   grid-column: 1 / span 3;
+  color: white;
 }
 .zbroja-1{grid-row: 4 / 5; grid-column: 1 / 2;}
 .zbroja-2{grid-row: 4 / 5; grid-column: 2 / 3;}
@@ -66,6 +76,7 @@ header {
 .hełmy {
   grid-row: 5 / 6;
   grid-column: 1 / span 3;
+  color: white;
 }
 .hełm-1{grid-row: 6 / 7; grid-column: 1 / 2;}
 .hełm-2{grid-row: 6 / 7; grid-column: 2 / 3;}
@@ -83,12 +94,9 @@ header {
   grid-row: 1 / -1;
   grid-column: 4 / 7;
   background-color: bisque;
-}
-
-.kowal img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  background-image: url(photos/zbrojmistrz3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .menu-wrapper {

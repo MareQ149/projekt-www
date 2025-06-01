@@ -49,7 +49,7 @@ if ($result) {
     </div>
 </nav>
 <header>
-    <h1>Witaj u kowala</h1>
+    <h1 id="napisik">Witaj u kowala</h1>
 </header>
 
 <div id="sklep">
@@ -185,7 +185,7 @@ if ($result) {
       >
     </div>
 
-    <div class="kowal"><img src="items/bombie.png" alt="Kowal"></div>
+    <div class="kowal"></div>
 </div>
 
 
