@@ -130,7 +130,7 @@ if (count($equipmentSlots) > 0) {
 // 3) Pobranie bonusów tylko dla itemów z wybranych slotów
 $bonuses = [
     'hp_bonus' => 0, 'damage_bonus' => 0, 'defense_bonus' => 0,
-    'agility_bonus' => 0, 'luck_bonus' => 0, 'block_bonus' => 0
+    'agility_bonus' => 0, 'luck_bonus' => 0, 'block_bonus' => 0, 'credits' => 0
 ];
 
 if (!empty($item_ids_for_stats)) {
@@ -142,8 +142,10 @@ if (!empty($item_ids_for_stats)) {
     $result_bonus = $stmt_bonus->get_result();
 
     while ($row = $result_bonus->fetch_assoc()) {
-        foreach ($bonuses as $key => &$value) {
-            $value += (int)$row[$key];
+        foreach ($row as $key => $bonus_value) {
+            if (isset($bonuses[$key])) {
+                $bonuses[$key] += (int)$bonus_value;
+            }
         }
     }
     $stmt_bonus->close();
@@ -151,11 +153,14 @@ if (!empty($item_ids_for_stats)) {
 
 $conn->close();
 
-// Dodanie bonusów do statystyk postaci
+
+
+// Dodanie bonusów
 foreach ($bonuses as $key => $value) {
     $stat_key = str_replace('_bonus', '', $key);
     $stats[$stat_key] += $value;
 }
+
 // Mapowanie bonusów do slotów (do data- w HTML)
 $bonuses_for_tooltip = [];
 foreach ($all_slots as $slot => $item) {
@@ -183,7 +188,7 @@ foreach ($all_slots as $slot => $item) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Twoj profil">
+    <meta name="description" content="Tu mozesz zalozyc na swoja postac przedmioty">
     <title>Gra - Ekwipunek</title>
     <link rel="stylesheet" href="style2.css" />
     <link rel="icon" href="photos/logo.jpg" type="image/jpg">
@@ -205,7 +210,6 @@ foreach ($all_slots as $slot => $item) {
         </ul>
     </div>
 </nav>
-
 <div id="ekwipunek">
     <section id="lewy">
         <div id="helm" class="slot">
@@ -375,12 +379,10 @@ foreach ($all_slots as $slot => $item) {
 <script src="tooltip.js"></script>
 
 <script>
-const toggleButton = document.getElementById("menuToggle");
-const dropdownMenu = document.getElementById("dropdownMenu");
-
-toggleButton.addEventListener("click", () => {
-    dropdownMenu.classList.toggle("show");
-});
+    document.getElementById('menuToggle').addEventListener('click', function() {
+        const menu = document.getElementById('dropdownMenu');
+        menu.classList.toggle('hidden');
+    });
 </script>
 
 <script>

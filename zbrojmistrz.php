@@ -29,32 +29,24 @@ if ($result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tu kupisz bron">
+    <meta name="description" content="Tu kupisz bronie, tarcze i trinkety dla swej postaci">
     <title>Kowal</title>
     <link rel="stylesheet" href="zbrojmistrz.css"/>
     <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
-    <nav class="menu-wrapper">
+<nav class="menu-wrapper">
     <button id="menuToggle">☰ Menu</button>
     <div id="dropdownMenu" class="hidden">
-    <ul>
-        <li><a href="stronka.php">Profil</a></li>
-        <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
-        <li><a href="kowal.php">Kowal</a></li>
-        <li><a href="walka.php">Walka</a></li>
-        <li><a href="logout.php">Wyloguj</a></li>
-    </ul>
+        <ul>
+            <li><a href="stronka.php">Profil</a></li>
+            <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
+            <li><a href="kowal.php">Kowal</a></li>
+            <li><a href="walka.php">Walka</a></li>
+            <li><a href="logout.php">Wyloguj</a></li>
+        </ul>
     </div>
 </nav>
-<script>
-  const toggleButton = document.getElementById("menuToggle");
-  const dropdownMenu = document.getElementById("dropdownMenu");
-
-    toggleButton.addEventListener("click", () => {
-        dropdownMenu.classList.toggle("show");
-  });
-</script>
     <header>
         <h1>Witaj u zbrojmistrza</h1>
     </header>
@@ -175,7 +167,7 @@ if ($result) {
             >
         </div>
         <div class="trinket-3">
-            <img src="items/bombie.png" alt="bombie"
+            <img src="items/bombie.png" alt="bombie bombie"
             <?php if(isset($items_data['bombie'])): ?>
                 data-id="<?= htmlspecialchars($items_data['bombie']['id']) ?>"
                 data-price="<?= htmlspecialchars($items_data['bombie']['price']) ?>"
@@ -188,7 +180,7 @@ if ($result) {
             <?php endif; ?>
             >
         </div>
-        <div class="zbrojmistrz"><img src="items/bombie.png" alt="bombie"></div>
+        <div class="zbrojmistrz"><img src="items/bombie.png" alt="bombie bombie"></div>
     </div>
 
 <div id="tooltip"></div>

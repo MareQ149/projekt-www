@@ -1,23 +1,22 @@
-const toggleButton = document.getElementById("menuToggle");
-const dropdownMenu = document.getElementById("dropdownMenu");
-
-toggleButton.addEventListener("click", () => {
-    dropdownMenu.classList.toggle("hidden");
-});
+document.getElementById('menuToggle').addEventListener('click', function() {
+        const menu = document.getElementById('dropdownMenu');
+        menu.classList.toggle('hidden');
+    });
 
 
 const walkabutton = document.getElementById("przycisk_walka");
 const walkadiv = document.getElementById("walka");
-
+const napis = document.getElementById("napis");
+const menu = document.getElementById("menuToggle");
 walkabutton.addEventListener("click", function() {
     walkadiv.classList.remove("hidden");
     walkabutton.classList.add("hidden");
-
-    // Kopia statystyk gracza i przeciwnika do modyfikacji w trakcie walki
+    napis.classList.add("hidden");
+    menu.classList.add("hidden");
     window.player = {...gracz};
     window.enemy = {...przeciwnik};
 
-    // Reset panelu i przycisków
+
     const panelGlowny = document.getElementById("panel_glowny");
     panelGlowny.innerHTML = "";
     
@@ -35,7 +34,7 @@ walkabutton.addEventListener("click", function() {
     updateHpBar("enemy-hp-bar", "enemy-hp-text", enemy.hp, przeciwnik.hp);
 });
 
-// Generowanie i wstawianie przycisków ataku i ucieczki (jeśli jeszcze nie ma)
+// Generowanie i wstawianie przycisków ataku i ucieczki
 if (!window.btnAtakuj) {
     const btnAtakuj = document.createElement("button");
     btnAtakuj.id = "btn_atakuj";
@@ -48,7 +47,7 @@ if (!window.btnAtakuj) {
     const btnZakoncz = document.createElement("button");
     btnZakoncz.id = "btn_zakoncz";
     btnZakoncz.textContent = "Zakończ";
-    btnZakoncz.classList.add("hidden");  // Na start ukryty
+    btnZakoncz.classList.add("hidden");
 
     const akcjeDiv = document.getElementById("akcje_walki");
     akcjeDiv.appendChild(btnAtakuj);
@@ -60,7 +59,6 @@ if (!window.btnAtakuj) {
     window.btnZakoncz = btnZakoncz;
 
     btnAtakuj.addEventListener("click", () => {
-        // Zablokuj przyciski natychmiast po kliknięciu
         btnAtakuj.disabled = true;
         btnUcieczka.disabled = true;
 
@@ -68,7 +66,7 @@ if (!window.btnAtakuj) {
         updateHpBar("enemy-hp-bar", "enemy-hp-text", enemy.hp, przeciwnik.hp);
 
         if (enemy.hp <= 0) {
-            dodajKomunikat("Pokonałeś przeciwnika!");
+            dodajKomunikat("Pokonałeś przeciwnika!", "green");
             aktualizujKredyty(30);
             koniecWalki();
             return;
@@ -79,29 +77,55 @@ if (!window.btnAtakuj) {
             updateHpBar("player-hp-bar", "player-hp-text", player.hp, gracz.hp);
 
             if (player.hp <= 0) {
-                dodajKomunikat("Zostałeś pokonany!");
+                dodajKomunikat("Zostałeś pokonany!", "red");
                 aktualizujKredyty(-10);
                 koniecWalki();
                 return;
             }
 
-            // Jeśli gra trwa dalej, odblokuj przyciski do kolejnej tury
             btnAtakuj.disabled = false;
             btnUcieczka.disabled = false;
         }, 500);
     });
 
     btnUcieczka.addEventListener("click", () => {
-        dodajKomunikat("Uciekłeś z walki!");
-        document.getElementById("walka").classList.add("hidden");
-        btnAtakuj.disabled = true;
-        btnUcieczka.disabled = true;
+        if (Math.random() < 0.5) {
+            alert("Uciekłeś z walki! Tracisz 50 kredytów.");
+            fetch("update_credits.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "change=-50"
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload(); 
+                } else {
+                    alert("Błąd przy aktualizacji kredytów: " + (data.error || "nieznany błąd"));
+                }
+            })
+            .catch(error => {
+                alert("Błąd połączenia z serwerem: " + error);
+            });
+
+        } else {
+            dodajKomunikat("Nie udało się uciec! Przeciwnik atakuje.", "red");
+            btnAtakuj.disabled = true;
+            btnUcieczka.disabled = true;
+
+            setTimeout(() => {
+                wykonajAtak(enemy, player, "Przeciwnik", "Ty");
+                btnAtakuj.disabled = false;
+                btnUcieczka.disabled = false;
+            }, 1000);
+        }
     });
 
+
+
     btnZakoncz.addEventListener("click", () => {
-        // Możesz tu zrobić co chcesz, np:
-        // - odświeżyć stronę
-        // - ukryć panel walki i pokazać przycisk szukaj przeciwnika
         window.location.reload();
     });
 }

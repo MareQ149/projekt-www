@@ -30,7 +30,7 @@ if ($result) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Tu kupisz pancerz">
+    <meta name="description" content="Tu kupisz zbroje dla swej postaci">
     <title>Kowal</title>
     <link rel="stylesheet" href="kowal.css" />
     <link rel="icon" href="photos/logo.jpg" type="image/jpg">
@@ -48,16 +48,6 @@ if ($result) {
     </ul>
     </div>
 </nav>
-
-<script>
-  const toggleButton = document.getElementById("menuToggle");
-  const dropdownMenu = document.getElementById("dropdownMenu");
-
-  toggleButton.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("show");
-  });
-</script>
-
 <header>
     <h1>Witaj u kowala</h1>
 </header>
@@ -109,7 +99,7 @@ if ($result) {
 
     <div class="zbroje">Zbroje</div>
     <div class="zbroja-1">
-      <img src="items/klata_wiking.png" alt="klata wikinga"
+      <img src="items/klata_wiking.png" alt="napiersnik wikinga"
       <?php if(isset($items_data['klata_wiking'])): ?>
         data-id="<?= htmlspecialchars($items_data['klata_wiking']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['klata_wiking']['price']) ?>"
@@ -123,7 +113,7 @@ if ($result) {
       >
     </div>
     <div class="zbroja-2">
-      <img src="items/klata_rycerz.png" alt="klata rycerza"
+      <img src="items/klata_rycerz.png" alt="napiersnik rycerza"
       <?php if(isset($items_data['klata_rycerz'])): ?>
         data-id="<?= htmlspecialchars($items_data['klata_rycerz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['klata_rycerz']['price']) ?>"
@@ -137,7 +127,7 @@ if ($result) {
       >
     </div>
     <div class="zbroja-3">
-      <img src="items/klata_zolnierz.png" alt="klata zolnierza"
+      <img src="items/klata_zolnierz.png" alt="napiersnik zolnierza"
       <?php if(isset($items_data['klata_zolnierz'])): ?>
         data-id="<?= htmlspecialchars($items_data['klata_zolnierz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['klata_zolnierz']['price']) ?>"
