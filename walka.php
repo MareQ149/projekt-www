@@ -143,7 +143,6 @@ $conn->close();
         </ul>
     </div>
 </nav>
-
 <div id="napis">
     <h1>WITAJ NA ARENIE</h1>
     <h3>Tutaj udowodnisz swoją wartość i pokażesz na co cię stać</h3>

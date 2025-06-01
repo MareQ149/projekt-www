@@ -379,12 +379,10 @@ foreach ($all_slots as $slot => $item) {
 <script src="tooltip.js"></script>
 
 <script>
-const toggleButton = document.getElementById("menuToggle");
-const dropdownMenu = document.getElementById("dropdownMenu");
-
-toggleButton.addEventListener("click", () => {
-    dropdownMenu.classList.toggle("show");
-});
+    document.getElementById('menuToggle').addEventListener('click', function() {
+        const menu = document.getElementById('dropdownMenu');
+        menu.classList.toggle('hidden');
+    });
 </script>
 
 <script>

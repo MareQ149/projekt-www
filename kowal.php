@@ -48,16 +48,6 @@ if ($result) {
     </ul>
     </div>
 </nav>
-
-<script>
-  const toggleButton = document.getElementById("menuToggle");
-  const dropdownMenu = document.getElementById("dropdownMenu");
-
-  toggleButton.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("show");
-  });
-</script>
-
 <header>
     <h1>Witaj u kowala</h1>
 </header>
