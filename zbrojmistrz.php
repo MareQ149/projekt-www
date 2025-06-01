@@ -1,5 +1,4 @@
 <?php
-//tak jak w kowal.php
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.html");
@@ -36,26 +35,18 @@ if ($result) {
     <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
-    <nav class="menu-wrapper">
+<nav class="menu-wrapper">
     <button id="menuToggle">☰ Menu</button>
     <div id="dropdownMenu" class="hidden">
-    <ul>
-        <li><a href="stronka.php">Profil</a></li>
-        <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
-        <li><a href="kowal.php">Kowal</a></li>
-        <li><a href="walka.php">Walka</a></li>
-        <li><a href="logout.php">Wyloguj</a></li>
-    </ul>
+        <ul>
+            <li><a href="stronka.php">Profil</a></li>
+            <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
+            <li><a href="kowal.php">Kowal</a></li>
+            <li><a href="walka.php">Walka</a></li>
+            <li><a href="logout.php">Wyloguj</a></li>
+        </ul>
     </div>
 </nav>
-<script>
-  const toggleButton = document.getElementById("menuToggle");
-  const dropdownMenu = document.getElementById("dropdownMenu");
-
-    toggleButton.addEventListener("click", () => {
-        dropdownMenu.classList.toggle("show");
-  });
-</script>
     <header>
         <h1>Witaj u zbrojmistrza</h1>
     </header>

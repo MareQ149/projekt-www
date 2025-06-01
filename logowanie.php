@@ -1,5 +1,4 @@
 <?php
-//polaczenie z baza danych, start sesji, informacja o formacie JSON
 session_start();
 header('Content-Type: application/json');
 
@@ -15,7 +14,6 @@ if ($conn->connect_error) {
     exit();
 }
 
-//czy formularz zostal wypelniony
 $user = $_POST['lusername'] ?? '';
 $passRaw = $_POST['lpassword'] ?? '';
 
@@ -24,7 +22,6 @@ if (empty($user) || empty($passRaw)) {
     exit();
 }
 
-//sprawdzenie czy uzytkownik istnieje
 $stmt = $conn->prepare("SELECT id, password FROM uzytkownicy WHERE username = ?");
 $stmt->bind_param("s", $user);
 $stmt->execute();

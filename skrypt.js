@@ -12,7 +12,7 @@ function showRegisterForm() {
   document.getElementById("rejestruj").style.display = "none";
 }
 
-// Logowanie
+// Logowanie AJAX
 document.getElementById("loginFormElement").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -32,7 +32,7 @@ document.getElementById("loginFormElement").addEventListener("submit", function 
     .catch(() => alert("Błąd sieci"));
 });
 
-// Rejestracja
+// Rejestracja AJAX
 document.getElementById("registerFormElement").addEventListener("submit", function (e) {
   e.preventDefault();
 

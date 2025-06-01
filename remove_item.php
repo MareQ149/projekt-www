@@ -1,11 +1,10 @@
 <?php
-//start sesji, polaczenie z db, info o JSON
 session_start();
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: index.html");
-    exit();
+    echo json_encode(['success' => false, 'message' => 'Brak sesji']);
+    exit;
 }
 
 $user_id = $_SESSION['user_id'];
@@ -23,7 +22,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-//Sprawdzenie czy item jest w slocie
+// Sprawdź czy user ma ten item w tym slocie
 $stmt = $conn->prepare("SELECT item_id FROM inventory WHERE user_id = ? AND slot = ?");
 $stmt->bind_param("is", $user_id, $slot);
 $stmt->execute();
@@ -37,7 +36,7 @@ if (!$row || (int)$row['item_id'] !== $item_id) {
     exit;
 }
 
-//Usuniecie itemu
+// Usuń item (ustaw na NULL)
 $stmt = $conn->prepare("UPDATE inventory SET item_id = NULL WHERE user_id = ? AND slot = ?");
 $stmt->bind_param("is", $user_id, $slot);
 $stmt->execute();

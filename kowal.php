@@ -1,5 +1,4 @@
 <?php
-//start sesji i polaczenie z db
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.html");
@@ -11,7 +10,6 @@ if ($conn->connect_error) {
     die("Błąd połączenia: " . $conn->connect_error);
 }
 
-//mapowanie bonusów (do data)
 $items_data = [];
 
 $sql = "SELECT i.id, i.name, i.photo, i.price, b.hp_bonus, b.damage_bonus, b.defense_bonus, b.agility_bonus, b.luck_bonus, b.block_bonus
@@ -50,16 +48,6 @@ if ($result) {
     </ul>
     </div>
 </nav>
-
-<script>
-  const toggleButton = document.getElementById("menuToggle");
-  const dropdownMenu = document.getElementById("dropdownMenu");
-
-  toggleButton.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("show");
-  });
-</script>
-
 <header>
     <h1>Witaj u kowala</h1>
 </header>

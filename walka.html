@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="walka.css">
+    <title>Walka</title>
+</head>
+<body>
+    <nav class="menu-wrapper">
+    <button id="menuToggle">☰ Menu</button>
+    <div id="dropdownMenu" class="hidden">
+    <ul>
+        <li><a href="stronka.php">Profil</a></li>
+        <li><a href="zbrojmistrz.html">Zbrojmistrz</a></li>
+        <li><a href="kowal.html">Kowal</a></li>
+        <li><a href="walka.html">Walka</a></li>
+        <li><a href="logout.php">Wyloguj</a></li>
+    </ul>
+    </div>
+</nav>
+    <div id="napis">
+        <h1>WITAJ NA ARENIE</h1>
+        <h3>Tutaj udowodnisz swoją wartość i pokażesz na co cię stać</h3>
+    </div>
+    <button id="przycisk_walka">Szukaj przeciwnika</button>
+    <div id="walka" class="hidden">
+        <img src="photos/logo.jpg" id="postac">
+        <img src="photos/bpp.jpg" id="wrog">
+        <div id="statystyki_postac">
+        <h2>Statystyki postaci</h2>
+            <ul>
+                <li>HP: 1</li>
+                <li>Obrażenia: 1</li>
+                <li>Obrona: 1</li>
+                <li>Zręczność: 1</li>
+                <li>Szczęście: 1</li>
+                <li>Blok: 1</li>
+                <li>Kredytki: 1</li>
+            </ul>
+        </div>
+        <div id="statystyki_wrog">
+        <h2>Statystyki wroga</h2>
+            <ul>
+                <li>HP: 1</li>
+                <li>Obrażenia: 1</li>
+                <li>Obrona: 1</li>
+                <li>Zręczność: 1</li>
+                <li>Szczęście: 1</li>
+                <li>Blok: 1</li>
+                <li>Kredytki: 1</li>
+            </ul>
+        </div>
+        <div id="panel_glowny">
+            be be beng
+        </div>
+    </div>
+    <script>
+        const toggleButton = document.getElementById("menuToggle");
+        const dropdownMenu = document.getElementById("dropdownMenu");
+
+        toggleButton.addEventListener("click", () => {
+            dropdownMenu.classList.toggle("show");});
+
+        const walkabutton = document.getElementById("przycisk_walka");
+        const walkadiv = document.getElementById("walka");
+
+        walkabutton.addEventListener("click", function(){
+            console.log("Kliknięto przycisk walki");
+            walkadiv.classList.remove("hidden");});
+    </script>
+</body>
+</html>

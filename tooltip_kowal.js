@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const tooltip = document.getElementById("tooltip");
 
-  //Wyswietlanie tooltipa
+  // Pokaz tooltipa po najechaniu i ukryj po wyjściu
   function showTooltip(e) {
     const item = e.currentTarget;
     const name = item.getAttribute("alt") || "Przedmiot";
@@ -35,9 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
     tooltip.style.display = "none";
   }
 
-  // Obsługa kliknięcia
+  // Obsługa kliknięcia - potwierdzenie i wysłanie fetch POST bez przeładowania strony
   function handleClick(e) {
-    e.preventDefault();
+    e.preventDefault();  // zapobiega domyślnemu submitowi
     const item = e.currentTarget;
     const itemId = item.getAttribute("data-id");
     if (!itemId) {
@@ -56,12 +56,15 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
           alert(data.message);
+          if (data.success) {
+            // Opcjonalnie: tutaj można odświeżyć widok kredytów lub ekwipunku
+          }
         })
         .catch(() => alert("Błąd komunikacji z serwerem"));
     }
   }
 
-  //Szukanie img z data
+  // Znajdujemy wszystkie obrazki z data-id i dodajemy eventy
   const items = document.querySelectorAll("img[data-id]");
   items.forEach(img => {
     img.addEventListener("mouseenter", showTooltip);
@@ -70,3 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
     img.addEventListener("click", handleClick);
   });
 });
+
+document.getElementById('menuToggle').addEventListener('click', function() {
+        const menu = document.getElementById('dropdownMenu');
+        menu.classList.toggle('hidden');
+    });
