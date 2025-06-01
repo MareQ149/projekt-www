@@ -183,8 +183,10 @@ foreach ($all_slots as $slot => $item) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Twoj profil">
     <title>Gra - Ekwipunek</title>
     <link rel="stylesheet" href="style2.css" />
+    <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
 <header>

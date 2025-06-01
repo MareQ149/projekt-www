@@ -127,8 +127,10 @@ $conn->close();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tu walczysz na smierc i zycie">
     <title>Walka</title>
     <link rel="stylesheet" href="walka.css" />
+    <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
 <nav class="menu-wrapper">

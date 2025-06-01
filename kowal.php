@@ -30,9 +30,10 @@ if ($result) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Tu kupisz pancerz">
     <title>Kowal</title>
     <link rel="stylesheet" href="kowal.css" />
-    
+    <link rel="icon" href="photos/logo.jpg" type="image/jpg">
 </head>
 <body>
 <nav class="menu-wrapper">
@@ -64,7 +65,7 @@ if ($result) {
 <div id="sklep">
     <div class="buty">Buty</div>
     <div class="buty-1">
-      <img src="items/buty_wiking.png"
+      <img src="items/buty_wiking.png" alt="buty wikinga"
       <?php if(isset($items_data['buty_wiking'])): ?>
         data-id="<?= htmlspecialchars($items_data['buty_wiking']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['buty_wiking']['price']) ?>"
@@ -78,7 +79,7 @@ if ($result) {
       >
     </div>
     <div class="buty-2">
-      <img src="items/buty_rycerz.png"
+      <img src="items/buty_rycerz.png" alt="buty rycerza"
       <?php if(isset($items_data['buty_rycerz'])): ?>
         data-id="<?= htmlspecialchars($items_data['buty_rycerz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['buty_rycerz']['price']) ?>"
@@ -92,7 +93,7 @@ if ($result) {
       >
     </div>
     <div class="buty-3">
-      <img src="items/buty_zolnierz.png"
+      <img src="items/buty_zolnierz.png" alt="buty zolnierza"
       <?php if(isset($items_data['buty_zolnierz'])): ?>
         data-id="<?= htmlspecialchars($items_data['buty_zolnierz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['buty_zolnierz']['price']) ?>"
@@ -108,7 +109,7 @@ if ($result) {
 
     <div class="zbroje">Zbroje</div>
     <div class="zbroja-1">
-      <img src="items/klata_wiking.png"
+      <img src="items/klata_wiking.png" alt="klata wikinga"
       <?php if(isset($items_data['klata_wiking'])): ?>
         data-id="<?= htmlspecialchars($items_data['klata_wiking']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['klata_wiking']['price']) ?>"
@@ -122,7 +123,7 @@ if ($result) {
       >
     </div>
     <div class="zbroja-2">
-      <img src="items/klata_rycerz.png"
+      <img src="items/klata_rycerz.png" alt="klata rycerza"
       <?php if(isset($items_data['klata_rycerz'])): ?>
         data-id="<?= htmlspecialchars($items_data['klata_rycerz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['klata_rycerz']['price']) ?>"
@@ -136,7 +137,7 @@ if ($result) {
       >
     </div>
     <div class="zbroja-3">
-      <img src="items/klata_zolnierz.png"
+      <img src="items/klata_zolnierz.png" alt="klata zolnierza"
       <?php if(isset($items_data['klata_zolnierz'])): ?>
         data-id="<?= htmlspecialchars($items_data['klata_zolnierz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['klata_zolnierz']['price']) ?>"
@@ -152,7 +153,7 @@ if ($result) {
 
     <div class="hełmy">Hełmy</div>
     <div class="hełm-1">
-      <img src="items/helm_wiking.png"
+      <img src="items/helm_wiking.png" alt="helm wikinga"
       <?php if(isset($items_data['helm_wiking'])): ?>
         data-id="<?= htmlspecialchars($items_data['helm_wiking']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['helm_wiking']['price']) ?>"
@@ -166,7 +167,7 @@ if ($result) {
       >
     </div>
     <div class="hełm-2">
-      <img src="items/helm_rycerz.png"
+      <img src="items/helm_rycerz.png" alt="helm rycerza"
       <?php if(isset($items_data['helm_rycerz'])): ?>
         data-id="<?= htmlspecialchars($items_data['helm_rycerz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['helm_rycerz']['price']) ?>"
@@ -180,7 +181,7 @@ if ($result) {
       >
     </div>
     <div class="hełm-3">
-      <img src="items/helm_zolnierz.png"
+      <img src="items/helm_zolnierz.png" alt="helm zolnierza"
       <?php if(isset($items_data['helm_zolnierz'])): ?>
         data-id="<?= htmlspecialchars($items_data['helm_zolnierz']['id']) ?>"
         data-price="<?= htmlspecialchars($items_data['helm_zolnierz']['price']) ?>"
