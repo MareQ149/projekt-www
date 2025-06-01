@@ -244,3 +244,8 @@ h2 {
 #btn_zakoncz{
   text-align: center !important;
 }
+
+.green { color: green; }
+.red { color: red; }
+.orange { color: orange; }
+.black { color: black; }
