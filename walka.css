@@ -1,5 +1,11 @@
+body{
+    background-image: url(photos/arena.jpg);
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+}
 .hidden {
-  display: none !important;
+    display: none !important;
 }
 
 #napis {
@@ -172,8 +178,8 @@ h2 {
     text-align: center;
     justify-content: end;
     align-items: center;
-    justify-self: center;
-    align-self: end;
+    justify-self: end;
+    align-self: center;
 }
 
 #akcje_walki button {
@@ -187,7 +193,23 @@ h2 {
     transition: background-color 0.2s ease;
     text-align: center;
 }
-
+#akcje_walki button{
+    background-image: url(photos/wood.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;               /* Kolor tekstu */
+    font-size: 20px;            /* Większy tekst */
+    padding: 15px 40px;         /* Większe wymiary */
+    border: 1px solid white;               /* Bez obramowania */
+    border-radius: 15px;
+    box-sizing: border-box;       /* Zaokrąglone rogi */
+    cursor: pointer;            /* Rączka po najechaniu */
+    margin: 10px;               /* Odstęp między przyciskami */
+    transition: transform 0.2s; /* Gładka animacja przy najechaniu */
+}
+#akcje_walki button:hover{
+    transform: scale(1.2);     /* Powiększenie przy hoverze */
+}
 #akcje_walki button:hover:not(:disabled) {
     background-color: #ddf;
 }
@@ -249,3 +271,21 @@ h2 {
 .red { color: red; }
 .orange { color: orange; }
 .black { color: black; }
+
+#przycisk_walka{
+    background-image: url(photos/wood.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;               /* Kolor tekstu */
+    font-size: 20px;            /* Większy tekst */
+    padding: 15px 40px;         /* Większe wymiary */
+    border: 1px solid white;               /* Bez obramowania */
+    border-radius: 15px;
+    box-sizing: border-box;       /* Zaokrąglone rogi */
+    cursor: pointer;            /* Rączka po najechaniu */
+    margin: 10px;               /* Odstęp między przyciskami */
+    transition: transform 0.2s; /* Gładka animacja przy najechaniu */
+}
+#przycisk_walka:hover{
+    transform: scale(1.2);     /* Powiększenie przy hoverze */
+}

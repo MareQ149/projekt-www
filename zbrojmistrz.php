@@ -48,7 +48,7 @@ if ($result) {
     </div>
 </nav>
     <header>
-        <h1>Witaj u zbrojmistrza</h1>
+        <h1 id="napisik">Witaj u zbrojmistrza</h1>
     </header>
     <div id="sklep">
         <div class="bronie">Bronie</div>
@@ -180,7 +180,7 @@ if ($result) {
             <?php endif; ?>
             >
         </div>
-        <div class="zbrojmistrz"><img src="items/bombie.png" alt="bombie bombie"></div>
+        <div class="zbrojmistrz"></div>
     </div>
 
 <div id="tooltip"></div>
