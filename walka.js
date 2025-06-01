@@ -1,9 +1,7 @@
-const toggleButton = document.getElementById("menuToggle");
-const dropdownMenu = document.getElementById("dropdownMenu");
-
-toggleButton.addEventListener("click", () => {
-    dropdownMenu.classList.toggle("hidden");
-});
+document.getElementById('menuToggle').addEventListener('click', function() {
+        const menu = document.getElementById('dropdownMenu');
+        menu.classList.toggle('hidden');
+    });
 
 
 const walkabutton = document.getElementById("przycisk_walka");
