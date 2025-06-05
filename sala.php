@@ -30,19 +30,14 @@ $sql = "
 ";
 
 $stmt = $conn->prepare($sql);
-
 if (!$stmt) {
     die("Błąd przygotowania zapytania: " . $conn->error);
 }
-
 $stmt->execute();
-
 $result = $stmt->get_result();
-
 if (!$result) {
     die("Błąd pobierania wyników: " . $conn->error);
 }
-
 ?>
 
 <!DOCTYPE html>
