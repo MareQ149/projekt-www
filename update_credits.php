@@ -26,7 +26,6 @@ if ($conn->connect_error) {
     exit;
 }
 
-//Pobranie kredytów i ich aktualizacja (min 0)
 $stmt = $conn->prepare("SELECT credits FROM postacie WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();

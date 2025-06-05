@@ -34,7 +34,7 @@ walkabutton.addEventListener("click", function() {
     updateHpBar("enemy-hp-bar", "enemy-hp-text", enemy.hp, przeciwnik.hp);
 });
 
-// Generowanie i wstawianie przycisków ataku i ucieczki
+//Generowanie i wstawianie przycisków ataku i ucieczki
 if (!window.btnAtakuj) {
     const btnAtakuj = document.createElement("button");
     btnAtakuj.id = "btn_atakuj";
@@ -130,12 +130,9 @@ if (!window.btnAtakuj) {
     });
 }
 
-// Funkcja wywoływana po zakończeniu walki
+//Funkcja wywoływana po zakończeniu walki
 function koniecWalki() {
-    // Ukryj przyciski atakuj i ucieczka
     btnAtakuj.classList.add("hidden");
     btnUcieczka.classList.add("hidden");
-
-    // Pokaż przycisk zakończ
     btnZakoncz.classList.remove("hidden");
 }
