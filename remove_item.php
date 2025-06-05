@@ -22,7 +22,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-// Sprawdź czy user ma ten item w tym slocie
+//czy item jest w slocie
 $stmt = $conn->prepare("SELECT item_id FROM inventory WHERE user_id = ? AND slot = ?");
 $stmt->bind_param("is", $user_id, $slot);
 $stmt->execute();
@@ -36,7 +36,7 @@ if (!$row || (int)$row['item_id'] !== $item_id) {
     exit;
 }
 
-// Usuń item (ustaw na NULL)
+//usuń item
 $stmt = $conn->prepare("UPDATE inventory SET item_id = NULL WHERE user_id = ? AND slot = ?");
 $stmt->bind_param("is", $user_id, $slot);
 $stmt->execute();

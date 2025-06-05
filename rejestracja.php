@@ -25,7 +25,7 @@ if (empty($user) || empty($passRaw)) {
 
 $pass = password_hash($passRaw, PASSWORD_DEFAULT);
 
-// Sprawdzenie czy użytkownik już istnieje
+//Czy user istnieje
 $stmt = $conn->prepare("SELECT id FROM uzytkownicy WHERE username = ?");
 $stmt->bind_param("s", $user);
 $stmt->execute();
@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
 }
 $stmt->close();
 
-// Dodanie użytkownika
+//Dodaj gracza
 $stmt = $conn->prepare("INSERT INTO uzytkownicy (username, password, rank) VALUES (?, ?, ?)");
 $stmt->bind_param("sss", $user, $pass, $rank);
 
@@ -52,7 +52,7 @@ if (!$stmt->execute()) {
 $user_id = $conn->insert_id;
 $stmt->close();
 
-// Dodaj 6 slotów ekwipunku
+//dodawanie slotów
 $equipmentSlots = ['helm', 'napiersnik', 'buty', 'bron', 'tarcza', 'trinket'];
 foreach ($equipmentSlots as $slot) {
     $stmt = $conn->prepare("INSERT INTO inventory (user_id, slot, item_id) VALUES (?, ?, NULL)");
@@ -61,7 +61,6 @@ foreach ($equipmentSlots as $slot) {
     $stmt->close();
 }
 
-// Dodaj 10 slotów slot1 - slot10
 for ($i = 1; $i <= 10; $i++) {
     $slot = 'slot' . $i;
     $stmt = $conn->prepare("INSERT INTO inventory (user_id, slot, item_id) VALUES (?, ?, NULL)");
@@ -70,7 +69,7 @@ for ($i = 1; $i <= 10; $i++) {
     $stmt->close();
 }
 
-// Statystyki postaci (domyślne)
+//defaultowe staty
 $stmt = $conn->prepare("INSERT INTO postacie (user_id) VALUES (?)");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();

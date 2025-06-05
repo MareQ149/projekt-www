@@ -90,6 +90,6 @@ function aktualizujKredyty(zmiana) {
     });
 }
 
-//Inicjalizacja pasków HP na start
+
 updateHpBar("player-hp-bar", "player-hp-text", gracz.hp, gracz.hp);
 updateHpBar("enemy-hp-bar", "enemy-hp-text", przeciwnik.hp, przeciwnik.hp);

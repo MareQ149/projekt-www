@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Błąd połączenia: " . $conn->connect_error);
 }
 
-// Pobranie statystyk postaci
+//staty
 $stmt = $conn->prepare("SELECT hp, damage, defense, agility, luck, block, credits FROM postacie WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -24,7 +24,7 @@ $stats = $result->fetch_assoc() ?: [
 ];
 $stmt->close();
 
-// 1) Pobierz WSZYSTKIE itemy z inventory użytkownika (do wyświetlania)
+//itemy z inv
 $sql_all = "
     SELECT inv.slot, i.photo, i.id as item_id, i.name
     FROM inventory inv
@@ -50,7 +50,7 @@ while ($row = $result_all->fetch_assoc()) {
 }
 $stmt_all->close();
 
-// --- NOWA CZĘŚĆ: pobranie danych do tooltipów (nazwa + bonusy) ---
+//dane do tooltipów
 $sql_tooltip = "
     SELECT i.id as item_id, i.name, 
            COALESCE(b.hp_bonus, 0) as hp_bonus,
@@ -85,14 +85,13 @@ while ($row = $result_tooltip->fetch_assoc()) {
 }
 $stmt_tooltip->close();
 
-// 2) Pobierz tylko itemy z wybranych slotów do liczenia statystyk
+//itemy z eq
 $equipmentSlots = ['helm', 'napiersnik', 'buty', 'bron', 'tarcza', 'trinket'];
 
 if (count($equipmentSlots) > 0) {
     $placeholders = implode(',', array_fill(0, count($equipmentSlots), '?'));
     $types = str_repeat('s', count($equipmentSlots));
     
-    // Budowanie zapytania z parametrami slotów i user_id
     $sql_eq = "
         SELECT inv.slot, i.id as item_id
         FROM inventory inv
@@ -102,9 +101,8 @@ if (count($equipmentSlots) > 0) {
 
     $stmt_eq = $conn->prepare($sql_eq);
 
-    // bind_param wymaga referencji i typów: 'i' + sloty jako stringi
     $params = array_merge([$user_id], $equipmentSlots);
-    $types_all = 'i' . $types; // user_id jako int + sloty jako stringi
+    $types_all = 'i' . $types;
 
     $bind_params = [];
     foreach ($params as $k => $v) {
@@ -127,7 +125,7 @@ if (count($equipmentSlots) > 0) {
     $item_ids_for_stats = [];
 }
 
-// 3) Pobranie bonusów tylko dla itemów z wybranych slotów
+//bonusy itemow z eq
 $bonuses = [
     'hp_bonus' => 0, 'damage_bonus' => 0, 'defense_bonus' => 0,
     'agility_bonus' => 0, 'luck_bonus' => 0, 'block_bonus' => 0, 'credits' => 0
@@ -155,19 +153,18 @@ $conn->close();
 
 
 
-// Dodanie bonusów
+//Dodanie bonusów
 foreach ($bonuses as $key => $value) {
     $stat_key = str_replace('_bonus', '', $key);
     $stats[$stat_key] += $value;
 }
 
-// Mapowanie bonusów do slotów (do data- w HTML)
+//data w HTML
 $bonuses_for_tooltip = [];
 foreach ($all_slots as $slot => $item) {
     if ($item && isset($tooltips_data[$item['item_id']])) {
         $bonuses_for_tooltip[$slot] = $tooltips_data[$item['item_id']];
     } else {
-        // Domyślne wartości gdy brak itemu w slocie
         $bonuses_for_tooltip[$slot] = [
             'hp_bonus' => 0,
             'damage_bonus' => 0,
