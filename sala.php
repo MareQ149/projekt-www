@@ -10,6 +10,14 @@ if ($conn->connect_error) {
     die("Błąd połączenia: " . $conn->connect_error);
 }
 
+// Obsługa sortowania
+$allowedSorts = ['hp', 'damage', 'defense', 'agility', 'luck', 'block', 'credits'];
+$sort = $_GET['sort'] ?? 'credits';
+
+if (!in_array($sort, $allowedSorts)) {
+    $sort = 'credits';
+}
+
 $sql = "
     SELECT 
         u.username,
@@ -27,59 +35,70 @@ $sql = "
     LEFT JOIN items it ON it.id = i.item_id
     LEFT JOIN item_bonuses ib ON ib.item_id = it.id
     GROUP BY u.id
+    ORDER BY $sort DESC
 ";
 
-$stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("Błąd przygotowania zapytania: " . $conn->error);
-}
-$stmt->execute();
-$result = $stmt->get_result();
+$result = $conn->query($sql);
 if (!$result) {
-    die("Błąd pobierania wyników: " . $conn->error);
+    die("Błąd zapytania: " . $conn->error);
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HALL OF FAME</title>
     <link rel="stylesheet" href="sala.css"/>
 </head>
 <body>
-    <nav class="menu-wrapper">
+<nav class="menu-wrapper">
     <button id="menuToggle">☰ Menu</button>
     <div id="dropdownMenu" class="hidden">
-    <ul>
-        <li><a href="stronka.php">Profil</a></li>
-        <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
-        <li><a href="kowal.php">Kowal</a></li>
-        <li><a href="walka.php">Walka</a></li>
-        <li><a href="sala.php">HALL OF FAME</a></li>
-        <li><a href="logout.php">Wyloguj</a></li>
-    </ul>
+        <ul>
+            <li><a href="stronka.php">Profil</a></li>
+            <li><a href="zbrojmistrz.php">Zbrojmistrz</a></li>
+            <li><a href="kowal.php">Kowal</a></li>
+            <li><a href="walka.php">Walka</a></li>
+            <li><a href="sala.php">HALL OF FAME</a></li>
+            <li><a href="logout.php">Wyloguj</a></li>
+        </ul>
     </div>
 </nav>
-    <header>
-        <h1 id="napisik">HALL OF FAME</h1>
-    </header>
-    <container>
-        <?php
-            while ($row = $result->fetch_assoc()) {
-                echo $row['username'] . ", " 
-                . $row['hp'] . ", " 
-                . $row['damage'] . ", "
-                . $row['defense'] . ", "
-                . $row['agility'] . ", "
-                . $row['luck'] . ", "
-                . $row['block'] . ", "
-                . $row['credits'] . "<br><hr>";
-            }
-        ?>
-    </container>
 
-    <script src="walka.js"></script>
+<header>
+    <h1 id="napisik">HALL OF FAME</h1>
+</header>
+
+<main>
+    <h3>SORTUJ WEDŁUG:</h3>
+    <div>
+        <a href="?sort=hp"><button>HP</button></a>
+        <a href="?sort=damage"><button>DMG</button></a>
+        <a href="?sort=defense"><button>DEF</button></a>
+        <a href="?sort=agility"><button>AGI</button></a>
+        <a href="?sort=luck"><button>LUCK</button></a>
+        <a href="?sort=block"><button>BLOCK</button></a>
+        <a href="?sort=credits"><button>CREDITS</button></a>
+    </div>
+
+    <section>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <div>
+                <strong><?= htmlspecialchars($row['username']) ?></strong> |
+                HP: <?= $row['hp'] ?> |
+                DMG: <?= $row['damage'] ?> |
+                DEF: <?= $row['defense'] ?> |
+                AGI: <?= $row['agility'] ?> |
+                LUCK: <?= $row['luck'] ?> |
+                BLOCK: <?= $row['block'] ?> |
+                CREDITS: <?= $row['credits'] ?>
+            </div>
+            <hr>
+        <?php endwhile; ?>
+    </section>
+</main>
+
+<script src="walka.js"></script>
 </body>
 </html>
