@@ -21,7 +21,7 @@ header {
     auto  auto
     auto  auto;
   width: 80%;
-  height: auto; /* <-- usuń sztywną wysokość */
+  height: auto;
   border: 5px solid black;
   box-sizing: border-box;
   margin: auto;
@@ -29,7 +29,7 @@ header {
   gap: 10px;
   text-align: center;
   justify-content: center;
-  align-items: start; /* ważne, żeby nie wymuszać height: 100% */
+  align-items: start;
   background-color: #333;
 }
 #napisik{
@@ -108,13 +108,13 @@ header {
 
 .menu-wrapper {
     position: fixed;
-    top: 20px;       /* nie przy krawędzi */
-    left: 20px;      /* nie przy krawędzi */
+    top: 20px;
+    left: 20px;
     z-index: 1000;
 }
 
 #menuToggle {
-    background-color: #333;  /* ciemnoszary */
+    background-color: #333;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -124,7 +124,7 @@ header {
 
 #dropdownMenu {
     margin-top: 5px;
-    background-color: #444;  /* nieco jaśniejszy szary */
+    background-color: #444;
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     overflow: hidden;

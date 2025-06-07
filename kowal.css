@@ -103,6 +103,7 @@ header {
     position: fixed;
     top: 20px;       /* nie przy krawędzi */
     left: 20px;      /* nie przy krawędzi */
+    z-index: 1000;
 }
 
 #menuToggle {

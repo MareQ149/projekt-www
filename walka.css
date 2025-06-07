@@ -187,19 +187,19 @@ h2 {
     background-image: url(photos/wood.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    color: white;               /* Kolor tekstu */
-    font-size: 20px;            /* Większy tekst */
-    padding: 15px 40px;         /* Większe wymiary */
-    border: 1px solid white;               /* Bez obramowania */
+    color: white;
+    font-size: 20px;
+    padding: 15px 40px;
+    border: 1px solid white;
     border-radius: 15px;
-    box-sizing: border-box;       /* Zaokrąglone rogi */
-    cursor: pointer;            /* Rączka po najechaniu */
-    margin: 10px;               /* Odstęp między przyciskami */
-    transition: transform 0.2s; /* Gładka animacja przy najechaniu */
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.2s;
 }
 
 #akcje_walki button:hover:not(:disabled), #przycisk_walka:hover:not(:disabled) {
-    transform: scale(1.2);     /* Powiększenie przy hoverze */
+    transform: scale(1.2);
 }
 
 #akcje_walki button:disabled {
@@ -209,13 +209,13 @@ h2 {
 
 .menu-wrapper {
     position: fixed;
-    top: 20px;       /* nie przy krawędzi */
-    left: 20px;      /* nie przy krawędzi */
+    top: 20px;
+    left: 20px;
     z-index: 1000;
 }
 
 #menuToggle {
-    background-color: #333;  /* ciemnoszary */
+    background-color: #333;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -225,7 +225,7 @@ h2 {
 
 #dropdownMenu {
     margin-top: 5px;
-    background-color: #444;  /* nieco jaśniejszy szary */
+    background-color: #444;
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     overflow: hidden;
