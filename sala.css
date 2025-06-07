@@ -1,12 +1,83 @@
-/*
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url(photos/panteon.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 35px 25px 60px auto;
+    width: 65%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 10px;
+    gap: 10px;
+    background-color: bisque;
+    margin-top: 150px ;
+}
+
+main #napisik {
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    justify-content: center;
+    align-items: center;
+}
+
+main #sortuj {
+    font-size: 18px;
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+    text-align: center;
+}
+
+main #guziki {
+    display: flex;
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+    justify-content: center;
+}
+
+main #guziki button {
+    background-image: url(photos/wood.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;               /* Kolor tekstu */
+    font-size: 14px;            /* Większy tekst */
+    padding: 15px 20px;         /* Większe wymiary */
+    border: 2px solid white;               /* Bez obramowania */
+    border-radius: 15px;
+    box-sizing: border-box;       /* Zaokrąglone rogi */
+    cursor: pointer;            /* Rączka po najechaniu */
+    margin: 10px;               /* Odstęp między przyciskami */
+    transition: transform 0.2s; /* Gładka animacja przy najechaniu */
+}
+
+main #guziki button:hover:not(:disabled) {
+    transform: scale(1.2);     /* Powiększenie przy hoverze */
+}
+
+main #gracze {
+    grid-column: 1 / -1;
+    grid-row: 4 / -1;
+    text-align: center;
+}
+
 .menu-wrapper {
-    position: absolute;
-    top: 20px;       
-    left: 20px;      
+    position: fixed;
+    top: 20px;       /* nie przy krawędzi */
+    left: 20px;      /* nie przy krawędzi */
+    z-index: 1000;
 }
 
 #menuToggle {
-    background-color: #333; 
+    background-color: #333;  /* ciemnoszary */
     color: white;
     padding: 10px 15px;
     border: none;
@@ -16,7 +87,7 @@
 
 #dropdownMenu {
     margin-top: 5px;
-    background-color: #444;  
+    background-color: #444;  /* nieco jaśniejszy szary */
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     overflow: hidden;
@@ -38,4 +109,7 @@
 #dropdownMenu li a:hover {
     background-color: #555;
 }
-*/
+
+.hidden {
+    display: none;
+}

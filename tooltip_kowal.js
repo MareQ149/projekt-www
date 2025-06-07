@@ -26,9 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function moveTooltip(e) {
-    tooltip.style.top = e.pageY + 15 + "px";
-    tooltip.style.left = e.pageX + 15 + "px";
-  }
+  const tooltipHeight = tooltip.offsetHeight;
+  tooltip.style.top = (e.pageY - tooltipHeight - 10) + "px";
+  tooltip.style.left = (e.pageX + 15) + "px";
+}
 
   function hideTooltip() {
     tooltip.style.display = "none";

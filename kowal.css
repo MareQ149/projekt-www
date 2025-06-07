@@ -100,7 +100,7 @@ header {
 }
 
 .menu-wrapper {
-    position: absolute;
+    position: fixed;
     top: 20px;       /* nie przy krawędzi */
     left: 20px;      /* nie przy krawędzi */
 }
@@ -142,6 +142,7 @@ header {
 .hidden {
     display: none;
 }
+
 #tooltip {
   position: absolute;
   top: 100%;

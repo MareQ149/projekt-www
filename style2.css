@@ -29,7 +29,7 @@ body {
   gap: 10px;
   padding: 10px;
   justify-content: center;
-    align-items: center;
+  align-items: center;
 }
 
 #prawy {
@@ -232,9 +232,10 @@ footer {
 }
 
 .menu-wrapper {
-    position: absolute;
+    position: fixed;
     top: 20px;       /* nie przy krawędzi */
     left: 20px;      /* nie przy krawędzi */
+    z-index: 1000;
 }
 
 #menuToggle {
